@@ -1,22 +1,46 @@
 <html>
   <head>
     <script>
+      var countdown;
+
       function displayRandomLetter() {
         var alphabet = "abcdefghijklmnopqrstuvwxyz";
         var randomIndex = Math.floor(Math.random() * 26);
         var randomLetter = alphabet[randomIndex];
         document.getElementById("letter").innerHTML = randomLetter;
+        resetTimer();
       }
 
       function displayRandomCategory() {
-        var categories = ["Animals", "Fruits", "Colors", "Cities", "Vehicles", "Countries", "Sports", "Music Genres", "Foods", "Planets", "Holidays", "Elements", "Clothing", "Languages", "Emotions", "Elements", "Celebrities", "Nature", "Instruments", "Weather", "Animals", "Shapes", "Books", "Movies", "Mythical Creatures", "Flowers", "Trees", "Ocean Animals", "Landmarks", "Superheroes", "Space", "Technology", "Mammals", "Birds", "Reptiles", "Amphibians", "Fish", "Insects", "Household Items", "Office Supplies", "School Supplies", "Tools", "Furniture", "Kitchen Utensils", "Muscles", "Bones", "Organs", "Human Body Parts"];
-        var randomIndex = Math.floor(Math.random() * 47);
+        var categories = ["Animals", "Fruits", "Colors", "Cities", "Vehicles", "Countries", "Sports", "Music Genres"];
+        var randomIndex = Math.floor(Math.random() * 8);
         var randomCategory = categories[randomIndex];
         document.getElementById("category").innerHTML = randomCategory;
+        resetTimer();
+      }
+
+      function startTimer() {
+        var timer = 5;
+        document.getElementById("timer").innerHTML = timer;
+        countdown = setInterval(function() {
+          timer--;
+          document.getElementById("timer").innerHTML = timer;
+          if (timer === 0) {
+            document.body.style.backgroundColor = "red";
+            clearInterval(countdown);
+          }
+        }, 1000);
+      }
+
+      function resetTimer() {
+        clearInterval(countdown);
+        document.getElementById("timer").innerHTML = "5";
+        document.body.style.backgroundColor = "";
+        startTimer();
       }
     </script>
   </head>
-  <body onload="displayRandomLetter(); displayRandomCategory();">
+  <body onload="displayRandomLetter(); displayRandomCategory(); startTimer();">
     <div>
       <h2>Random Letter:</h2>
       <p id="letter"></p>
@@ -27,5 +51,10 @@
       <p id="category"></p>
       <button onclick="displayRandomCategory();">Change Category</button>
     </div>
+    <div>
+      <h2>Timer:</h2>
+      <p id="timer"></p>
+    </div>
   </body>
 </html>
+
