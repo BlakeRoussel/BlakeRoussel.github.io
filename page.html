@@ -1,62 +1,108 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
-
 <head>
-  <title>Blake Roussel</title>
-  <meta name="description" content="website description" />
-  <meta name="keywords" content="website keywords, website keywords" />
-  <meta http-equiv="content-type" content="text/html; charset=windows-1252" />
-  <link rel="stylesheet" type="text/css" href="style/style.css" title="style" />
+	<title>Park Rentals Calendar</title>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<style type="text/css">
+		table {
+			border-collapse: collapse;
+			width: 100%;
+		}
+		td {
+			border: 1px solid black;
+			padding: 5px;
+			text-align: center;
+		}
+		.selected {
+			background-color: yellow;
+		}
+	</style>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			// Initialize variables
+			var startDate, endDate, isDragging = false;
+			
+			// Handle mouse events on table cells
+			$("td").mousedown(function() {
+				startDate = $(this).attr("data-date");
+				$(this).addClass("selected");
+				isDragging = true;
+			}).mouseenter(function() {
+				if (isDragging) {
+					endDate = $(this).attr("data-date");
+					selectRange(startDate, endDate);
+				}
+			}).mouseup(function() {
+				isDragging = false;
+			});
+			
+			// Function to select a range of dates
+			function selectRange(start, end) {
+				var startMillis = new Date(start).getTime();
+				var endMillis = new Date(end).getTime();
+				$("td").each(function() {
+					var thisMillis = new Date($(this).attr("data-date")).getTime();
+					if (thisMillis >= startMillis && thisMillis <= endMillis) {
+						$(this).addClass("selected");
+					}
+				});
+			}
+		});
+	</script>
 </head>
-
 <body>
-  <div id="main">
-    <div id="header">
-      <div id="logo">
-        <div id="logo_text">
-          <!-- class="logo_colour", allows you to change the colour of the text -->
-          <h1><a href="index.html">Blake<span class="logo_colour">Roussel</span></a></h1>
-          <h2>Data Science & Analytics Graduate. LSU </h2>
-        </div>
-      </div>
-      <div id="menubar">
-        <ul id="menu">
-          <!-- put class="selected" in the li tag for the selected page - to highlight which page you're on -->
-          <li class="selected"><a href="index.html">About Me</a></li>
-          <li><a href="examples.html">Portfolio</a></li>
-          <li><a href="page.html">Resume</a></li>
-         
-        </ul>
-      </div>
-    </div>
-    <div id="site_content">
-      <div class="sidebar">
-        <!-- insert your sidebar items here -->
-        <h3>Contact Me</h3>
-        <h4>Phone Number</h4>
-        <h5>(225) 206 7793</h5>
-        <p></p>
-        <h4>Email Address</h4>
-        <h5>brous22@lsu.edu</h5>
-        <h3>Search</h3>
-        <form method="post" action="#" id="search_form">
-          <p>
-            <input class="search" type="text" name="search_field" value="Enter keywords....." />
-            <input name="search" type="image" style="border: 0; margin: 0 0 -9px 5px;" src="style/search.png" alt="Search" title="Search" />
-          </p>
-        </form>
-      </div>
-      <div id="content">
-        <!-- insert the page content here -->
-		</p>
-		<a href="Blake_Roussel_Resume.docx" download="filename">Download Resume</a>
-        <h1>Resume</h1>
-		<span class="center"><img src="style/resumess.PNG" alt="example graphic" /></span>
-      </div>
-    </div>
-    <div id="footer">
-      Copyright &copy; Blake Roussel</a>
-    </div>
-  </div>
-</body>
-</html>
+	<h1>Park Rentals Calendar</h1>
+	<table>
+		<thead>
+			<tr>
+				<th>Sun</th>
+				<th>Mon</th>
+				<th>Tue</th>
+				<th>Wed</th>
+				<th>Thu</th>
+				<th>Fri</th>
+				<th>Sat</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td>1</td>
+			</tr>
+			<tr>
+				<td>2</td>
+				<td>3</td>
+				<td>4</td>
+				<td>5</td>
+				<td>6</td>
+				<td>7</td>
+				<td>8</td>
+			</tr>
+			<tr>
+				<td>9</td>
+				<td>10</td>
+				<td>11</td>
+				<td>12</td>
+				<td>13</td>
+				<td>14</td>
+				<td>15</td>
+			</tr>
+			<tr>
+				<td>16</td>
+				<td>17</td>
+				<td>18</td>
+				<td>19</td>
+				<td>20</td>
+				<td>21</td>
+				<td>22</td>
+			</tr>
+			<tr>
+				<td>23</td>
+				<td>24</td>
+				<td>25</td>
+				<td>26
