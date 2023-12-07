@@ -1,67 +1,71 @@
-<html>
-  <head>
+<!DOCTYPE html>
+
+<html
+ 
+lang="en">
+
+<head>
+
+    
+<meta
+ 
+charset="UTF-8">
+
+    
+<meta
+ 
+name="viewport"
+ 
+content="width=device-width, initial-scale=1.0">
+
+    
+<title>Random Category and Letter Game</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 20px;
+        }
+        #game-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #category {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+        #letter {
+            font-size: 2em;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <h2 id="category"></h2>
+        <h1 id="letter"></h1>
+        <button id="new-game-button">New Game</button>
+    </div>
+
     <script>
-      var countdown;
+        const categories = ["Animals", "Fruits", "Cities", "Countries", "Jobs"];
+        const letters = "abcdefghijklmnopqrstuvwxyz".toUpperCase().split("");
 
-      function displayRandomLetter() {
-        var alphabet = "abcdefghijklmnopqrstuvwxyz";
-        var randomIndex = Math.floor(Math.random() * 26);
-        var randomLetter = alphabet[randomIndex];
-        document.getElementById("letter").innerHTML = randomLetter;
-        resetTimer();
-      }
+        function generateGame() {
+            const category = categories[Math.floor(Math.random() * categories.length)];
+            const letter = letters[Math.floor(Math.random() * letters.length)];
 
-      function displayRandomCategory() {
-        var categories = ["Animals", "Fruits", "Colors", "Cities", "Vehicles", "Countries", "Sports", "Music Genres", "Foods", "Planets", "Holidays", "Elements", "Clothing", "Languages", "Emotions", "Elements", "Celebrities", "Nature", "Instruments", "Weather", "Animals", "Shapes", "Books", "Movies", "Mythical Creatures", "Flowers", "Trees", "Ocean Animals", "Landmarks", "Superheroes", "Space", "Technology", "Mammals", "Birds", "Reptiles", "Amphibians", "Fish", "Insects", "Household Items", "Office Supplies", "School Supplies", "Tools", "Furniture", "Kitchen Utensils", "Muscles", "Bones", "Organs", "Human Body Parts", "Animals", "Cities", "Colors", "Countries", "Foods", "Fruits", "Girls' Names", "Boys' Names", "Vehicles", "Sports", "Famous People", "Brands", "Flowers", "Trees", "Famous Movies", "Elements", "Holidays", "School Subjects", "Occupations", "Drinks", "Music Genres", "Comic Book Characters", "Types of Weather",  "Words that end with '-ing'", "Spices", "Gems", "Seafood", "Types of Sushi", "Cosmetics", "Computer Brands", "Gadgets", "Words associated with Summer", "Words associated with Winter", "Words associated with Spring", "Words associated with Fall", "Words associated with the ocean", "Household items", "Office Supplies", "Types of Noodles", "Words associated with the mountains", "Types of Cookies", "Types of Candy", "Words associated with Space", "Types of Fish", "Types of Cheese", "Words associated with the Jungle", "Types of Pasta", "Words associated with the Desert"];
-        var randomIndex = Math.floor(Math.random() * 96);
-        var randomCategory = categories[randomIndex];
-        document.getElementById("category").innerHTML = randomCategory;
-        resetTimer();
-      }
+            document.getElementById("category").textContent = category;
+            document.getElementById("letter").textContent = letter;
+        }
 
-      function displayRandomLetterAndCategory() {
-        displayRandomLetter();
-        displayRandomCategory();
-      }
+        window.onload = function() {
+            generateGame();
 
-      function startTimer() {
-        var timer = 5;
-        document.getElementById("timer").innerHTML = timer;
-        countdown = setInterval(function() {
-          timer--;
-          document.getElementById("timer").innerHTML = timer;
-          if (timer === 0) {
-            document.body.style.backgroundColor = "red";
-            clearInterval(countdown);
-          }
-        }, 1000);
-      }
-
-      function resetTimer() {
-        clearInterval(countdown);
-        document.getElementById("timer").innerHTML = "5";
-        document.body.style.backgroundColor = "";
-        startTimer();
-      }
+            document.getElementById("new-game-button").addEventListener("click", function() {
+                generateGame();
+            });
+        };
     </script>
-  </head>
-  <body onload="displayRandomLetter(); displayRandomCategory(); startTimer();">
-    <div>
-      <h2>Random Letter:</h2>
-      <p id="letter"></p>
-      <button onclick="displayRandomLetter();">Change Letter</button>
-    </div>
-    <div>
-      <h2>Random Category:</h2>
-      <p id="category"></p>
-      <button onclick="displayRandomCategory();">Change Category</button>
-    </div>
-    <div>
-      <h2>Timer:</h2>
-      <p id="timer"></p>
-    </div>
-    <div>
-      <button onclick="displayRandomLetterAndCategory();">Change Letter and Category</button>
-    </div>
-  </body>
+</body>
 </html>
