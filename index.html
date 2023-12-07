@@ -19,7 +19,7 @@ name="viewport"
 content="width=device-width, initial-scale=1.0">
 
     
-<title>Random Category and Letter Game</title>
+<title>Random Category and Letter Game with Timer</title>
     <style>
         body {
             font-family: sans-serif;
@@ -38,18 +38,27 @@ content="width=device-width, initial-scale=1.0">
             font-size: 2em;
             font-weight: bold;
         }
+        #timer {
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
     <div id="game-container">
         <h2 id="category"></h2>
         <h1 id="letter"></h1>
+        <p id="timer">Time remaining: <span id="time-display">00:00</span></p>
         <button id="new-game-button">New Game</button>
     </div>
 
     <script>
-        const categories = ["Animals", "Fruits", "Cities", "Countries", "Jobs"];
+        const categories = [
+            "Animals", "Fruits", "Cities", "Countries", "Jobs",
+            "Objects", "Colors", "Emotions", "Brands", "Sports"
+        ];
         const letters = "abcdefghijklmnopqrstuvwxyz".toUpperCase().split("");
+        let timeLeft = 30; // Initial time in seconds
 
         function generateGame() {
             const category = categories[Math.floor(Math.random() * categories.length)];
@@ -57,6 +66,30 @@ content="width=device-width, initial-scale=1.0">
 
             document.getElementById("category").textContent = category;
             document.getElementById("letter").textContent = letter;
+
+            startTimer();
+        }
+
+        function startTimer() {
+            timeLeft = 30;
+            document.getElementById("time-display").textContent = formatTime(timeLeft);
+            const timerInterval = setInterval(() => {
+                if (timeLeft === 0) {
+                    clearInterval(timerInterval);
+                    alert("Time's up!");
+                } else {
+                    timeLeft--;
+                    document.getElementById("time-display").textContent = formatTime(timeLeft);
+                }
+            }, 1000);
+        }
+
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const remainingSeconds = seconds % 60;
+            return
+ 
+`${minutes.toString().padStart(2, "0")}:${remainingSeconds.toString().padStart(2, "0")}`;
         }
 
         window.onload = function() {
