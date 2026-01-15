@@ -10,6 +10,7 @@
             --lsu-gold: #FDD023;
             --light-gray: #f8f9fa;
             --dark-gray: #343a40;
+            --text-color: #333;
         }
         
         body {
@@ -17,34 +18,119 @@
             margin: 0;
             padding: 0;
             background-color: #f4f4f4;
-            color: #333;
+            color: var(--text-color);
         }
 
         header {
             background-color: var(--lsu-purple);
             color: white;
-            padding: 2rem 1rem;
+            padding: 1.5rem 1rem;
             text-align: center;
             border-bottom: 5px solid var(--lsu-gold);
         }
 
-        h1 {
-            margin: 0;
-            font-size: 2.5rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        h2 {
-            margin: 0.5rem 0 0;
-            font-weight: 300;
-            color: var(--lsu-gold);
-        }
+        h1 { margin: 0; font-size: 2.2rem; text-transform: uppercase; letter-spacing: 2px; }
+        h2 { margin: 0.5rem 0 0; font-weight: 300; color: var(--lsu-gold); font-size: 1.2rem; }
 
         .container {
             max-width: 1000px;
             margin: 2rem auto;
             padding: 0 1rem;
+        }
+
+        /* --- NEXT GAME PREVIEW CARD STYLES --- */
+        .next-game-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(70, 29, 124, 0.15);
+            overflow: hidden;
+            margin-bottom: 2rem;
+            display: flex;
+            flex-direction: column;
+            border-top: 6px solid var(--lsu-purple);
+        }
+
+        .next-game-header {
+            background-color: var(--lsu-gold);
+            color: var(--lsu-purple);
+            padding: 0.8rem 1.5rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .live-indicator {
+            background: #d32f2f;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            animation: pulse 2s infinite;
+            display: none; /* Hidden by default */
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.6; }
+            100% { opacity: 1; }
+        }
+
+        .next-game-content {
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .matchup {
+            flex: 2;
+            min-width: 250px;
+        }
+
+        .matchup h3 {
+            font-size: 2rem;
+            margin: 0 0 0.5rem 0;
+            color: var(--lsu-purple);
+            line-height: 1.2;
+        }
+
+        .matchup .vs-text {
+            font-size: 1rem;
+            color: #666;
+            font-weight: 600;
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 0.2rem;
+        }
+
+        .game-meta {
+            flex: 1;
+            min-width: 200px;
+            background: var(--light-gray);
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 0.95rem;
+        }
+
+        .meta-item {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .meta-item:last-child { margin-bottom: 0; }
+        
+        .meta-icon { width: 20px; text-align: center; color: var(--lsu-purple); }
+
+        /* --- TABLE STYLES --- */
+        .schedule-container {
             background: white;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             border-radius: 8px;
@@ -54,15 +140,10 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 2rem;
         }
 
-        th, td {
-            padding: 1rem;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-
+        th, td { padding: 1rem; text-align: left; border-bottom: 1px solid #ddd; }
+        
         th {
             background-color: var(--lsu-purple);
             color: white;
@@ -72,84 +153,20 @@
             top: 0;
         }
 
-        tr:nth-child(even) {
-            background-color: var(--light-gray);
-        }
+        tr:nth-child(even) { background-color: var(--light-gray); }
+        tr:hover { background-color: #e9ecef; }
 
-        tr:hover {
-            background-color: #e9ecef;
-        }
+        .home-game { border-left: 5px solid var(--lsu-purple); }
+        .away-game { border-left: 5px solid var(--dark-gray); }
+        .neutral-game { border-left: 5px solid var(--lsu-gold); }
 
-        .date-col {
-            font-weight: bold;
-            color: var(--lsu-purple);
-            width: 20%;
-        }
-
-        .opponent-col {
-            font-weight: 600;
-            width: 35%;
-        }
-
-        .location-col {
-            color: #666;
-            font-size: 0.9rem;
-            width: 30%;
-        }
-
-        .time-col {
-            font-weight: bold;
-            color: var(--dark-gray);
-            width: 15%;
-            text-align: right;
-        }
-
-        .home-game {
-            border-left: 5px solid var(--lsu-purple);
-        }
-
-        .away-game {
-            border-left: 5px solid var(--dark-gray);
-        }
-
-        .neutral-game {
-            border-left: 5px solid var(--lsu-gold);
-        }
-
-        .note {
-            font-size: 0.8rem;
-            color: #666;
-            font-style: italic;
-            display: block;
-            margin-top: 4px;
-        }
-        
-        .legend {
-            display: flex;
-            gap: 1rem;
-            padding: 1rem;
-            background: #fff;
-            justify-content: center;
-            font-size: 0.9rem;
-        }
-        .legend-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        .dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-        }
-
+        /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
-            h1 { font-size: 1.8rem; }
+            .next-game-content { flex-direction: column; align-items: flex-start; }
+            .matchup h3 { font-size: 1.8rem; }
+            .game-meta { width: 100%; box-sizing: border-box; }
+            .location-col { display: none; }
             th, td { padding: 0.75rem 0.5rem; font-size: 0.9rem; }
-            .location-col { display: none; } /* Hide location on small screens */
-            .date-col { width: 30%; }
-            .opponent-col { width: 50%; }
-            .time-col { width: 20%; }
         }
     </style>
 </head>
@@ -161,379 +178,94 @@
 </header>
 
 <div class="container">
-    <div class="legend">
-        <div class="legend-item"><div class="dot" style="background: var(--lsu-purple)"></div> Home</div>
-        <div class="legend-item"><div class="dot" style="background: var(--dark-gray)"></div> Away</div>
-        <div class="legend-item"><div class="dot" style="background: var(--lsu-gold)"></div> Neutral</div>
-    </div>
-
-    <table>
-        <thead>
-            <tr>
-                <th>Date</th>
-                <th>Opponent</th>
-                <th class="location-col">Location</th>
-                <th>Time (CT)</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr class="home-game">
-                <td class="date-col">Fri, Feb 13</td>
-                <td class="opponent-col">Milwaukee</td>
-                <td class="location-col">Baton Rouge, La.</td>
-                <td class="time-col">2:00 PM</td>
-            </tr>
-            <tr class="home-game">
-                <td class="date-col">Sat, Feb 14</td>
-                <td class="opponent-col">Milwaukee</td>
-                <td class="location-col">Baton Rouge, La.</td>
-                <td class="time-col">1:00 PM</td>
-            </tr>
-            <tr class="home-game">
-                <td class="date-col">Sun, Feb 15</td>
-                <td class="opponent-col">Milwaukee</td>
-                <td class="location-col">Baton Rouge, La.</td>
-                <td class="time-col">1:00 PM</td>
-            </tr>
-            <tr class="home-game">
-                <td class="date-col">Mon, Feb 16</td>
-                <td class="opponent-col">Kent State</td>
-                <td class="location-col">Baton Rouge, La.</td>
-                <td class="time-col">TBA</td>
-            </tr>
-            <tr class="home-game">
-                <td class="date-col">Wed, Feb 18</td>
-                <td class="opponent-col">Nicholls</td>
-                <td class="location-col">Baton Rouge, La.</td>
-                <td class="time-col">6:30 PM</td>
-            </tr>
-            
-            <tr class="neutral-game">
-                <td class="date-col">Fri, Feb 20</td>
-                <td class="opponent-col">Indiana <span class="note">Jax College Baseball Classic</span></td>
-                <td class="location-col">Jacksonville, Fla.</td>
-                <td class="time-col">1:00 PM</td>
-            </tr>
-            <tr class="neutral-game">
-                <td class="date-col">Sat, Feb 21</td>
-                <td class="opponent-col">Notre Dame <span class="note">Jax College Baseball Classic</span></td>
-                <td class="location-col">Jacksonville, Fla.</td>
-                <td class="time-col">11:00 AM</td>
-            </tr>
-            <tr class="neutral-game">
-                <td class="date-col">Sun, Feb 22</td>
-                <td class="opponent-col">Central Florida <span class="note">Jax College Baseball Classic</span></td>
-                <td class="location-col">Jacksonville, Fla.</td>
-                <td class="time-col">2:00 PM</td>
-            </tr>
-
-            <tr class="home-game">
-                <td class="date-col">Tue, Feb 24</td>
-                <td class="opponent-col">McNeese</td>
-                <td class="location-col">Baton Rouge, La.</td>
-                <td class="time-col">2:00 PM</td>
-            </tr>
-            <tr class="home-game">
-                <td class="date-col">Fri, Feb 27</td>
-                <td class="opponent-col">Sacramento State</td>
-                <td class="location-col">Baton Rouge, La.</td>
-                <td class="time-col">6:30 PM</td>
-            </tr>
-            <tr class="home-game">
-                <td class="date-col">Sat, Feb 28</td>
-                <td class="opponent-col">Sacramento State</td>
-                <td class="location-col">Baton Rouge, La.</td>
-                <td class="time-col">2:00 PM</td>
-            </tr>
-
-            <tr class="home-game">
-                <td class="date-col">Sun, Mar 1</td>
-                <td class="opponent-col">Sacramento State</td>
-                <td class="location-col">Baton Rouge, La.</td>
-                <td class="time-col">1:00 PM</td>
-            </tr>
-            <tr class="away-game">
-                <td class="date-col">Wed, Mar 4</td>
-                <td class="opponent-col">UL-Lafayette</td>
-                <td class="location-col">Lafayette, La.</td>
-                <td class="time-col">6:00 PM</td>
-            </tr>
-            <tr class="home-game">
-                <td class="date-col">Fri, Mar 6</td>
-                <td class="opponent-col">Dartmouth</td>
-                <td class="location-col">Baton Rouge, La.</td>
-                <td class="time-col">6:30 PM</td>
-            </tr>
-            <tr class="home-game">
-                <td class="date-col">Sat, Mar 7</td>
-                <td class="opponent-col">Dartmouth</td>
-                <td class="location-col">Baton Rouge, La.</td>
-                <td class="time-col">6:00 PM</td>
-            </tr>
-            <tr class="home-game">
-                <td class="date-col">Sun, Mar 8</td>
-                <td class="opponent-col">Dartmouth</td>
-                <td class="location-col">Baton Rouge, La.</td>
-                <td class="time-col">1:00 PM</td>
-            </tr>
-            <tr class="home-game">
-                <td class="date-col">Tue, Mar 10</td>
-                <td class="opponent-col">Northeastern</td>
-                <td class="location-col">Baton Rouge, La.</td>
-                <td class="time-col">6:30 PM</td>
-            </tr>
-             <tr class="home-game">
-                <td class="date-col">Wed, Mar 11</td>
-                <td class="opponent-col">Creighton</td>
-                <td class="location-col">Baton Rouge, La.</td>
-                <td class="time-col">TBA</td>
-            </tr>
-            <tr class="away-game">
-                <td class="date-col">Fri, Mar 13</td>
-                <td class="opponent-col">Vanderbilt</td>
-                <td class="location-col">Nashville, Tenn.</td>
-                <td class="time-col">6:00 PM</td>
-            </tr>
-            <tr class="away-game">
-                <td class="date-col">Sat, Mar 14</td>
-                <td class="opponent-col">Vanderbilt</td>
-                <td class="location-col">Nashville, Tenn.</td>
-                <td class="time-col">3:00 PM</td>
-            </tr>
-            <tr class="away-game">
-                <td class="date-col">Sun, Mar 15</td>
-                <td class="opponent-col">Vanderbilt</td>
-                <td class="location-col">Nashville, Tenn.</td>
-                <td class="time-col">1:00 PM</td>
-            </tr>
-            <tr class="home-game">
-                <td class="date-col">Tue, Mar 17</td>
-                <td class="opponent-col">Grambling State</td>
-                <td class="location-col">Baton Rouge, La.</td>
-                <td class="time-col">6:30 PM</td>
-            </tr>
-            <tr class="home-game">
-                <td class="date-col">Thu, Mar 19</td>
-                <td class="opponent-col">Southern</td>
-                <td class="location-col">Baton Rouge, La.</td>
-                <td class="time-col">7:00 PM</td>
-            </tr>
-            <tr class="home-game">
-                <td class="date-col">Fri, Mar 20</td>
-                <td class="opponent-col">Oklahoma</td>
-                <td class="location-col">Baton Rouge, La.</td>
-                <td class="time-col">6:30 PM</td>
-            </tr>
-            <tr class="home-game">
-                <td class="date-col">Sat, Mar 21</td>
-                <td class="opponent-col">Oklahoma</td>
-                <td class="location-col">Baton Rouge, La.</td>
-                <td class="time-col">2:00 PM</td>
-            </tr>
-            <tr class="home-game">
-                <td class="date-col">Sun, Mar 22</td>
-                <td class="opponent-col">Oklahoma</td>
-                <td class="location-col">Baton Rouge, La.</td>
-                <td class="time-col">1:00 PM</td>
-            </tr>
-             <tr class="home-game">
-                <td class="date-col">Tue, Mar 24</td>
-                <td class="opponent-col">Louisiana Tech</td>
-                <td class="location-col">Baton Rouge, La.</td>
-                <td class="time-col">6:30 PM</td>
-            </tr>
-            <tr class="home-game">
-                <td class="date-col">Fri, Mar 27</td>
-                <td class="opponent-col">Kentucky</td>
-                <td class="location-col">Baton Rouge, La.</td>
-                <td class="time-col">6:30 PM</td>
-            </tr>
-            <tr class="home-game">
-                <td class="date-col">Sat, Mar 28</td>
-                <td class="opponent-col">Kentucky</td>
-                <td class="location-col">Baton Rouge, La.</td>
-                <td class="time-col">2:00 PM</td>
-            </tr>
-            <tr class="home-game">
-                <td class="date-col">Sun, Mar 29</td>
-                <td class="opponent-col">Kentucky</td>
-                <td class="location-col">Baton Rouge, La.</td>
-                <td class="time-col">12:00 PM</td>
-            </tr>
-            <tr class="home-game">
-                <td class="date-col">Tue, Mar 31</td>
-                <td class="opponent-col">Bethune-Cookman</td>
-                <td class="location-col">Baton Rouge, La.</td>
-                <td class="time-col">6:30 PM</td>
-            </tr>
-
-            <tr class="away-game">
-                <td class="date-col">Fri, Apr 3</td>
-                <td class="opponent-col">Tennessee</td>
-                <td class="location-col">Knoxville, Tenn.</td>
-                <td class="time-col">4:30 PM</td>
-            </tr>
-            <tr class="away-game">
-                <td class="date-col">Sat, Apr 4</td>
-                <td class="opponent-col">Tennessee</td>
-                <td class="location-col">Knoxville, Tenn.</td>
-                <td class="time-col">5:00 PM</td>
-            </tr>
-            <tr class="away-game">
-                <td class="date-col">Sun, Apr 5</td>
-                <td class="opponent-col">Tennessee</td>
-                <td class="location-col">Knoxville, Tenn.</td>
-                <td class="time-col">12:00 PM</td>
-            </tr>
-             <tr class="home-game">
-                <td class="date-col">Tue, Apr 7</td>
-                <td class="opponent-col">New Orleans</td> <td class="location-col">Baton Rouge, La.</td>
-                <td class="time-col">6:30 PM</td>
-            </tr>
-            <tr class="away-game">
-                <td class="date-col">Fri, Apr 10</td>
-                <td class="opponent-col">Ole Miss</td>
-                <td class="location-col">Oxford, Miss.</td>
-                <td class="time-col">6:30 PM</td>
-            </tr>
-            <tr class="away-game">
-                <td class="date-col">Sat, Apr 11</td>
-                <td class="opponent-col">Ole Miss</td>
-                <td class="location-col">Oxford, Miss.</td>
-                <td class="time-col">4:00 PM</td>
-            </tr>
-            <tr class="away-game">
-                <td class="date-col">Sun, Apr 12</td>
-                <td class="opponent-col">Ole Miss</td>
-                <td class="location-col">Oxford, Miss.</td>
-                <td class="time-col">1:30 PM</td>
-            </tr>
-            <tr class="home-game">
-                <td class="date-col">Tue, Apr 14</td>
-                <td class="opponent-col">Northwestern State</td>
-                <td class="location-col">Baton Rouge, La.</td>
-                <td class="time-col">6:30 PM</td>
-            </tr>
-            <tr class="home-game">
-                <td class="date-col">Fri, Apr 17</td>
-                <td class="opponent-col">Texas A&M</td>
-                <td class="location-col">Baton Rouge, La.</td>
-                <td class="time-col">6:00 PM</td>
-            </tr>
-            <tr class="home-game">
-                <td class="date-col">Sat, Apr 18</td>
-                <td class="opponent-col">Texas A&M</td>
-                <td class="location-col">Baton Rouge, La.</td>
-                <td class="time-col">7:00 PM</td>
-            </tr>
-            <tr class="home-game">
-                <td class="date-col">Sun, Apr 19</td>
-                <td class="opponent-col">Texas A&M</td>
-                <td class="location-col">Baton Rouge, La.</td>
-                <td class="time-col">1:00 PM</td>
-            </tr>
-            <tr class="home-game">
-                <td class="date-col">Tue, Apr 21</td>
-                <td class="opponent-col">New Orleans</td>
-                <td class="location-col">Baton Rouge, La.</td>
-                <td class="time-col">6:30 PM</td>
-            </tr>
-            <tr class="away-game">
-                <td class="date-col">Fri, Apr 24</td>
-                <td class="opponent-col">Mississippi State</td>
-                <td class="location-col">Starkville, Miss.</td>
-                <td class="time-col">6:00 PM</td>
-            </tr>
-            <tr class="away-game">
-                <td class="date-col">Sat, Apr 25</td>
-                <td class="opponent-col">Mississippi State</td>
-                <td class="location-col">Starkville, Miss.</td>
-                <td class="time-col">6:30 PM</td>
-            </tr>
-            <tr class="away-game">
-                <td class="date-col">Sun, Apr 26</td>
-                <td class="opponent-col">Mississippi State</td>
-                <td class="location-col">Starkville, Miss.</td>
-                <td class="time-col">1:00 PM</td>
-            </tr>
-            <tr class="home-game">
-                <td class="date-col">Tue, Apr 28</td>
-                <td class="opponent-col">Southeastern Louisiana</td>
-                <td class="location-col">Baton Rouge, La.</td>
-                <td class="time-col">6:30 PM</td>
-            </tr>
-
-            <tr class="home-game">
-                <td class="date-col">Fri, May 1</td>
-                <td class="opponent-col">South Carolina</td>
-                <td class="location-col">Baton Rouge, La.</td>
-                <td class="time-col">6:30 PM</td>
-            </tr>
-            <tr class="home-game">
-                <td class="date-col">Sat, May 2</td>
-                <td class="opponent-col">South Carolina</td>
-                <td class="location-col">Baton Rouge, La.</td>
-                <td class="time-col">6:00 PM</td>
-            </tr>
-            <tr class="home-game">
-                <td class="date-col">Sun, May 3</td>
-                <td class="opponent-col">South Carolina</td>
-                <td class="location-col">Baton Rouge, La.</td>
-                <td class="time-col">2:00 PM</td>
-            </tr>
-            <tr class="home-game">
-                <td class="date-col">Tue, May 5</td>
-                <td class="opponent-col">Tulane</td>
-                <td class="location-col">Baton Rouge, La.</td>
-                <td class="time-col">6:30 PM</td>
-            </tr>
-            <tr class="away-game">
-                <td class="date-col">Fri, May 8</td>
-                <td class="opponent-col">Georgia</td>
-                <td class="location-col">Athens, Ga.</td>
-                <td class="time-col">5:00 PM</td>
-            </tr>
-            <tr class="away-game">
-                <td class="date-col">Sat, May 9</td>
-                <td class="opponent-col">Georgia</td>
-                <td class="location-col">Athens, Ga.</td>
-                <td class="time-col">6:00 PM</td>
-            </tr>
-            <tr class="away-game">
-                <td class="date-col">Sun, May 10</td>
-                <td class="opponent-col">Georgia</td>
-                <td class="location-col">Athens, Ga.</td>
-                <td class="time-col">TBA</td>
-            </tr>
-            <tr class="home-game">
-                <td class="date-col">Thu, May 14</td>
-                <td class="opponent-col">Florida</td>
-                <td class="location-col">Baton Rouge, La.</td>
-                <td class="time-col">6:30 PM</td>
-            </tr>
-            <tr class="home-game">
-                <td class="date-col">Fri, May 15</td>
-                <td class="opponent-col">Florida</td>
-                <td class="location-col">Baton Rouge, La.</td>
-                <td class="time-col">6:30 PM</td>
-            </tr>
-            <tr class="home-game">
-                <td class="date-col">Sat, May 16</td>
-                <td class="opponent-col">Florida</td>
-                <td class="location-col">Baton Rouge, La.</td>
-                <td class="time-col">2:00 PM</td>
-            </tr>
-        </tbody>
-    </table>
     
-    <div style="padding: 1rem; background: var(--light-gray); text-align: center;">
-        <h3>Postseason</h3>
-        <p><strong>SEC Tournament:</strong> May 19-24 (Hoover, Ala.)</p>
-        <p><strong>NCAA Regionals:</strong> May 29-Jun 1 (Campus Sites)</p>
-        <p><strong>NCAA Super Regionals:</strong> Jun 5-8 (Campus Sites)</p>
-        <p><strong>College World Series:</strong> Jun 12-22 (Omaha, Neb.)</p>
+    <div id="next-game-card" class="next-game-card" style="display: none;">
+        <div class="next-game-header">
+            <span>Next Matchup</span>
+            <span id="game-status-badge" class="live-indicator">LIVE NOW</span>
+        </div>
+        <div class="next-game-content">
+            <div class="matchup">
+                <span class="vs-text">LSU Tigers vs.</span>
+                <h3 id="preview-opponent">Opponent Name</h3>
+                <div id="preview-date-display" style="color: #666; font-weight: 600;">Date Display</div>
+            </div>
+            <div class="game-meta">
+                <div class="meta-item">
+                    <span class="meta-icon">📍</span>
+                    <span id="preview-location">Location</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-icon">⏰</span>
+                    <span id="preview-time">Time</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-icon">📅</span>
+                    <span id="preview-countdown">Loading...</span>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
 
-</body>
-</html>
+    <div class="schedule-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Opponent</th>
+                    <th class="location-col">Location</th>
+                    <th>Time (CT)</th>
+                </tr>
+            </thead>
+            <tbody id="schedule-body">
+                <tr class="home-game" data-date="2026-02-13" data-time="14:00">
+                    <td>Fri, Feb 13</td><td>Milwaukee</td><td class="location-col">Baton Rouge, La.</td><td>2:00 PM</td>
+                </tr>
+                <tr class="home-game" data-date="2026-02-14" data-time="13:00">
+                    <td>Sat, Feb 14</td><td>Milwaukee</td><td class="location-col">Baton Rouge, La.</td><td>1:00 PM</td>
+                </tr>
+                <tr class="home-game" data-date="2026-02-15" data-time="13:00">
+                    <td>Sun, Feb 15</td><td>Milwaukee</td><td class="location-col">Baton Rouge, La.</td><td>1:00 PM</td>
+                </tr>
+                <tr class="home-game" data-date="2026-02-16" data-time="TBA">
+                    <td>Mon, Feb 16</td><td>Kent State</td><td class="location-col">Baton Rouge, La.</td><td>TBA</td>
+                </tr>
+                <tr class="home-game" data-date="2026-02-18" data-time="18:30">
+                    <td>Wed, Feb 18</td><td>Nicholls</td><td class="location-col">Baton Rouge, La.</td><td>6:30 PM</td>
+                </tr>
+                <tr class="neutral-game" data-date="2026-02-20" data-time="13:00">
+                    <td>Fri, Feb 20</td><td>Indiana (Jax Classic)</td><td class="location-col">Jacksonville, Fla.</td><td>1:00 PM</td>
+                </tr>
+                <tr class="neutral-game" data-date="2026-02-21" data-time="11:00">
+                    <td>Sat, Feb 21</td><td>Notre Dame (Jax Classic)</td><td class="location-col">Jacksonville, Fla.</td><td>11:00 AM</td>
+                </tr>
+                <tr class="neutral-game" data-date="2026-02-22" data-time="14:00">
+                    <td>Sun, Feb 22</td><td>Central Florida (Jax Classic)</td><td class="location-col">Jacksonville, Fla.</td><td>2:00 PM</td>
+                </tr>
+                <tr class="home-game" data-date="2026-02-24" data-time="14:00">
+                    <td>Tue, Feb 24</td><td>McNeese</td><td class="location-col">Baton Rouge, La.</td><td>2:00 PM</td>
+                </tr>
+                <tr class="home-game" data-date="2026-02-27" data-time="18:30">
+                    <td>Fri, Feb 27</td><td>Sacramento State</td><td class="location-col">Baton Rouge, La.</td><td>6:30 PM</td>
+                </tr>
+                <tr class="home-game" data-date="2026-02-28" data-time="14:00">
+                    <td>Sat, Feb 28</td><td>Sacramento State</td><td class="location-col">Baton Rouge, La.</td><td>2:00 PM</td>
+                </tr>
+
+                <tr class="home-game" data-date="2026-03-01" data-time="13:00">
+                    <td>Sun, Mar 1</td><td>Sacramento State</td><td class="location-col">Baton Rouge, La.</td><td>1:00 PM</td>
+                </tr>
+                <tr class="away-game" data-date="2026-03-04" data-time="18:00">
+                    <td>Wed, Mar 4</td><td>UL-Lafayette</td><td class="location-col">Lafayette, La.</td><td>6:00 PM</td>
+                </tr>
+                <tr class="home-game" data-date="2026-03-06" data-time="18:30">
+                    <td>Fri, Mar 6</td><td>Dartmouth</td><td class="location-col">Baton Rouge, La.</td><td>6:30 PM</td>
+                </tr>
+                <tr class="home-game" data-date="2026-03-07" data-time="18:00">
+                    <td>Sat, Mar 7</td><td>Dartmouth</td><td class="location-col">Baton Rouge, La.</td><td>6:00 PM</td>
+                </tr>
+                <tr class="home-game" data-date="2026-03-08" data-time="13:00">
+                    <td>Sun, Mar 8</td><td>Dartmouth</td><td class="location-col">Baton Rouge, La.</td><td>1:00 PM</td>
+                </tr>
+                <tr class="home-game" data-date="2026-03-10" data-time="18:30">
+                    <td>Tue, Mar 10</td><td>Northeastern</td><td class="
