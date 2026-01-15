@@ -1,104 +1,301 @@
 <!DOCTYPE html>
-
-<html
- 
-lang="en">
-
+<html lang="en">
 <head>
-
-    
-<meta
- 
-charset="UTF-8">
-
-    
-<meta
- 
-name="viewport"
- 
-content="width=device-width, initial-scale=1.0">
-
-    
-<title>Random Category and Letter Game with Timer</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>The Mole</title>
     <style>
+        /* RESET & BASE STYLES */
+        * { box-sizing: border-box; touch-action: manipulation; }
         body {
-            font-family: sans-serif;
-            margin: 20px;
-        }
-        #game-container {
+            margin: 0;
+            padding: 0;
+            background-color: #121212;
+            color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+            user-select: none; /* Prevents highlighting text */
         }
-        #category {
-            font-size: 1.5em;
-            margin-bottom: 10px;
+
+        /* SCREENS */
+        .screen {
+            display: none;
+            width: 100%;
+            height: 100%;
+            padding: 20px;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
-        #letter {
-            font-size: 2em;
+        .active { display: flex; }
+
+        /* TYPOGRAPHY */
+        h1 { font-size: 2.5rem; margin-bottom: 10px; color: #ff5252; }
+        h2 { font-size: 1.8rem; margin-bottom: 20px; }
+        p { font-size: 1.2rem; color: #bbbbbb; margin-bottom: 30px; max-width: 300px; line-height: 1.5; }
+        
+        .big-text {
+            font-size: 3rem;
             font-weight: bold;
+            color: #4caf50;
+            margin: 20px 0;
         }
-        #timer {
-            font-size: 1.2em;
-            margin-top: 10px;
+
+        .mole-text { color: #ff5252; } 
+
+        /* CONTROLS */
+        .control-group {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        button {
+            background: #333;
+            border: 2px solid #555;
+            color: white;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            min-width: 60px;
+        }
+        
+        button:active { transform: scale(0.95); background: #444; }
+        
+        button.primary {
+            background-color: #ff5252; /* Red accent */
+            border-color: #ff5252;
+            font-weight: bold;
+            width: 100%;
+            max-width: 300px;
+            padding: 20px;
+            font-size: 1.5rem;
+        }
+
+        /* CARD REVEAL AREA */
+        #card-area {
+            background: #1e1e1e;
+            width: 100%;
+            max-width: 350px;
+            height: 300px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            border: 2px dashed #444;
+            flex-direction: column;
+        }
+
+        .hidden-content { display: none; }
+        .visible-content { display: flex; flex-direction: column; align-items: center;}
+
+        /* TIMER */
+        #timer-display {
+            font-size: 5rem;
+            font-variant-numeric: tabular-nums;
+            margin: 20px 0;
         }
     </style>
 </head>
 <body>
-    <div id="game-container">
-        <h2 id="category"></h2>
-        <h1 id="letter"></h1>
-        <p id="timer">Time remaining: <span id="time-display">00:00</span></p>
-        <button id="new-game-button">New Game</button>
+
+    <div id="setup-screen" class="screen active">
+        <h1>THE MOLE</h1>
+        <p>Pass the phone. Find the liar.</p>
+        
+        <div class="control-group">
+            <button onclick="adjustPlayers(-1)">-</button>
+            <h2 id="player-count">4 Players</h2>
+            <button onclick="adjustPlayers(1)">+</button>
+        </div>
+
+        <button class="primary" onclick="startGame()">Start Game</button>
     </div>
 
-    <script>
-        const categories = [
-            "Animals", "Fruits", "Cities", "Countries", "Jobs",
-            "Objects", "Colors", "Emotions", "Brands", "Sports"
-        ];
-        const letters = "abcdefghijklmnopqrstuvwxyz".toUpperCase().split("");
-        let timeLeft = 30; // Initial time in seconds
+    <div id="pass-screen" class="screen">
+        <h2 id="player-instruction">Pass to Player 1</h2>
+        
+        <div id="card-area">
+            <div id="state-hidden" class="visible-content">
+                <p>Tap & Hold button below to see your role.</p>
+            </div>
+            
+            <div id="state-revealed" class="hidden-content">
+                <span style="font-size: 1rem; color: #888;">LOCATION:</span>
+                <div id="role-display" class="big-text">???</div>
+            </div>
+        </div>
 
-        function generateGame() {
-            const category = categories[Math.floor(Math.random() * categories.length)];
-            const letter = letters[Math.floor(Math.random() * letters.length)];
+        <button id="reveal-btn" class="primary" 
+                onmousedown="showRole()" onmouseup="hideRole()" onmouseleave="hideRole()"
+                ontouchstart="showRole()" ontouchend="hideRole()">
+            HOLD TO REVEAL
+        </button>
 
-            document.getElementById("category").textContent = category;
-            document.getElementById("letter").textContent = letter;
+        <button id="next-btn" onclick="nextPlayer()" style="margin-top: 20px; display: none;">
+            Next Player >
+        </button>
+    </div>
 
+    <div id="game-screen" class="screen">
+        <h2>Discuss!</h2>
+        <p>Ask questions. Find the Mole.</p>
+        <div id="timer-display">08:00</div>
+        <button class="primary" onclick="endGame()">Reveal Location</button>
+    </div>
+
+    <div id="result-screen" class="screen">
+        <h2>Game Over</h2>
+        
+        <p>The Location was:</p>
+        <div id="reveal-location" class="big-text">LOCATION</div>
+        
+        <p>The Mole was:</p>
+        <div id="reveal-mole" class="big-text mole-text">Player X</div>
+
+        <button class="primary" onclick="resetGame()">Play Again</button>
+    </div>
+
+<script>
+    // --- DATA ---
+    const locations = [
+        "Airplane", "Bank", "Beach", "Broadway Theater", "Casino", "Cathedral", 
+        "Circus Tent", "Corporate Party", "Crusader Army", "Day Spa", "Embassy", 
+        "Hospital", "Hotel", "Military Base", "Movie Studio", "Ocean Liner", 
+        "Passenger Train", "Pirate Ship", "Polar Station", "Police Station", 
+        "Restaurant", "School", "Service Station", "Space Station", "Submarine", 
+        "Supermarket", "University", "Zoo"
+    ];
+
+    // --- STATE ---
+    let playerCount = 4;
+    let currentPlayer = 0;
+    let moleIndex = 0;
+    let currentLocation = "";
+    let timerInterval;
+
+    // --- DOM ELEMENTS ---
+    const screens = {
+        setup: document.getElementById('setup-screen'),
+        pass: document.getElementById('pass-screen'),
+        game: document.getElementById('game-screen'),
+        result: document.getElementById('result-screen')
+    };
+
+    // --- FUNCTIONS ---
+
+    function switchScreen(screenName) {
+        Object.values(screens).forEach(s => s.classList.remove('active'));
+        screens[screenName].classList.add('active');
+    }
+
+    function adjustPlayers(num) {
+        playerCount += num;
+        if (playerCount < 3) playerCount = 3;
+        if (playerCount > 15) playerCount = 15;
+        document.getElementById('player-count').innerText = playerCount + " Players";
+    }
+
+    function startGame() {
+        // Reset Logic
+        currentPlayer = 1;
+        moleIndex = Math.floor(Math.random() * playerCount) + 1; // 1-based index
+        currentLocation = locations[Math.floor(Math.random() * locations.length)];
+        
+        // UI Reset
+        updatePassScreen();
+        switchScreen('pass');
+    }
+
+    function updatePassScreen() {
+        document.getElementById('player-instruction').innerText = `Pass to Player ${currentPlayer}`;
+        document.getElementById('reveal-btn').style.display = 'block';
+        document.getElementById('next-btn').style.display = 'none';
+        
+        // Reset card state
+        document.getElementById('state-hidden').style.display = 'flex';
+        document.getElementById('state-revealed').style.display = 'none';
+    }
+
+    function showRole() {
+        const roleDisplay = document.getElementById('role-display');
+        const stateHidden = document.getElementById('state-hidden');
+        const stateRevealed = document.getElementById('state-revealed');
+
+        stateHidden.style.display = 'none';
+        stateRevealed.style.display = 'flex';
+
+        if (currentPlayer === moleIndex) {
+            roleDisplay.innerText = "YOU ARE THE MOLE";
+            roleDisplay.classList.add('mole-text');
+        } else {
+            roleDisplay.innerText = currentLocation;
+            roleDisplay.classList.remove('mole-text');
+        }
+    }
+
+    function hideRole() {
+        document.getElementById('state-hidden').style.display = 'flex';
+        document.getElementById('state-revealed').style.display = 'none';
+        
+        // Once they let go, allow them to move to next player
+        document.getElementById('reveal-btn').style.display = 'none';
+        document.getElementById('next-btn').style.display = 'inline-block';
+    }
+
+    function nextPlayer() {
+        currentPlayer++;
+        if (currentPlayer > playerCount) {
             startTimer();
+        } else {
+            updatePassScreen();
         }
+    }
 
-        function startTimer() {
-            timeLeft = 30;
-            document.getElementById("time-display").textContent = formatTime(timeLeft);
-            const timerInterval = setInterval(() => {
-                if (timeLeft === 0) {
-                    clearInterval(timerInterval);
-                    alert("Time's up!");
-                } else {
-                    timeLeft--;
-                    document.getElementById("time-display").textContent = formatTime(timeLeft);
-                }
-            }, 1000);
-        }
+    function startTimer() {
+        switchScreen('game');
+        let duration = 8 * 60; // 8 minutes
+        const display = document.getElementById('timer-display');
+        
+        clearInterval(timerInterval);
+        updateTimerDisplay(duration, display);
 
-        function formatTime(seconds) {
-            const minutes = Math.floor(seconds / 60);
-            const remainingSeconds = seconds % 60;
-            return
- 
-`${minutes.toString().padStart(2, "0")}:${remainingSeconds.toString().padStart(2, "0")}`;
-        }
+        timerInterval = setInterval(() => {
+            duration--;
+            updateTimerDisplay(duration, display);
+            if (duration <= 0) {
+                clearInterval(timerInterval);
+                // Optional: Play a sound or turn red here
+            }
+        }, 1000);
+    }
 
-        window.onload = function() {
-            generateGame();
+    function updateTimerDisplay(seconds, displayElement) {
+        const m = Math.floor(seconds / 60);
+        const s = seconds % 60;
+        displayElement.innerText = `${m < 10 ? '0' : ''}${m}:${s < 10 ? '0' : ''}${s}`;
+    }
 
-            document.getElementById("new-game-button").addEventListener("click", function() {
-                generateGame();
-            });
-        };
-    </script>
+    function endGame() {
+        clearInterval(timerInterval);
+        document.getElementById('reveal-location').innerText = currentLocation;
+        document.getElementById('reveal-mole').innerText = `Player ${moleIndex}`;
+        switchScreen('result');
+    }
+
+    function resetGame() {
+        switchScreen('setup');
+    }
+</script>
 </body>
 </html>
