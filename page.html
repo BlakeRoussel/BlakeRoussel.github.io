@@ -70,7 +70,7 @@
             border-radius: 4px;
             font-size: 0.75rem;
             animation: pulse 2s infinite;
-            display: none; /* Hidden by default */
+            display: none;
         }
 
         @keyframes pulse {
@@ -88,26 +88,9 @@
             gap: 1rem;
         }
 
-        .matchup {
-            flex: 2;
-            min-width: 250px;
-        }
-
-        .matchup h3 {
-            font-size: 2rem;
-            margin: 0 0 0.5rem 0;
-            color: var(--lsu-purple);
-            line-height: 1.2;
-        }
-
-        .matchup .vs-text {
-            font-size: 1rem;
-            color: #666;
-            font-weight: 600;
-            text-transform: uppercase;
-            display: block;
-            margin-bottom: 0.2rem;
-        }
+        .matchup { flex: 2; min-width: 250px; }
+        .matchup h3 { font-size: 2rem; margin: 0 0 0.5rem 0; color: var(--lsu-purple); line-height: 1.2; }
+        .matchup .vs-text { font-size: 1rem; color: #666; font-weight: 600; text-transform: uppercase; display: block; margin-bottom: 0.2rem; }
 
         .game-meta {
             flex: 1;
@@ -118,15 +101,8 @@
             font-size: 0.95rem;
         }
 
-        .meta-item {
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
+        .meta-item { margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; }
         .meta-item:last-child { margin-bottom: 0; }
-        
         .meta-icon { width: 20px; text-align: center; color: var(--lsu-purple); }
 
         /* --- TABLE STYLES --- */
@@ -137,11 +113,7 @@
             overflow: hidden;
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
+        table { width: 100%; border-collapse: collapse; }
         th, td { padding: 1rem; text-align: left; border-bottom: 1px solid #ddd; }
         
         th {
@@ -156,17 +128,39 @@
         tr:nth-child(even) { background-color: var(--light-gray); }
         tr:hover { background-color: #e9ecef; }
 
+        /* Game Type Indicators */
         .home-game { border-left: 5px solid var(--lsu-purple); }
         .away-game { border-left: 5px solid var(--dark-gray); }
         .neutral-game { border-left: 5px solid var(--lsu-gold); }
+
+        .stadium-name {
+            display: block;
+            font-weight: 600;
+            color: var(--lsu-purple);
+            font-size: 0.9em;
+        }
+        
+        .city-name {
+            display: block;
+            font-size: 0.85em;
+            color: #666;
+        }
 
         /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
             .next-game-content { flex-direction: column; align-items: flex-start; }
             .matchup h3 { font-size: 1.8rem; }
             .game-meta { width: 100%; box-sizing: border-box; }
-            .location-col { display: none; }
+            
+            /* Responsive Table adjustments */
             th, td { padding: 0.75rem 0.5rem; font-size: 0.9rem; }
+            
+            /* Instead of hiding location, we make it smaller */
+            .location-col { 
+                font-size: 0.8rem; 
+                width: 30%;
+            }
+            .stadium-name { font-size: 0.85rem; }
         }
     </style>
 </head>
@@ -213,184 +207,527 @@
                 <tr>
                     <th>Date</th>
                     <th>Opponent</th>
-                    <th class="location-col">Location</th>
+                    <th class="location-col">Stadium / Location</th>
                     <th>Time (CT)</th>
                 </tr>
             </thead>
             <tbody id="schedule-body">
+                
                 <tr class="home-game" data-date="2026-02-13" data-time="14:00">
-                    <td>Fri, Feb 13</td><td>Milwaukee</td><td class="location-col">Baton Rouge, La.</td><td>2:00 PM</td>
+                    <td>Fri, Feb 13</td>
+                    <td>Milwaukee</td>
+                    <td class="location-col">
+                        <span class="stadium-name">Alex Box Stadium</span>
+                        <span class="city-name">Baton Rouge, La.</span>
+                    </td>
+                    <td>2:00 PM</td>
                 </tr>
                 <tr class="home-game" data-date="2026-02-14" data-time="13:00">
-                    <td>Sat, Feb 14</td><td>Milwaukee</td><td class="location-col">Baton Rouge, La.</td><td>1:00 PM</td>
+                    <td>Sat, Feb 14</td>
+                    <td>Milwaukee</td>
+                    <td class="location-col">
+                        <span class="stadium-name">Alex Box Stadium</span>
+                        <span class="city-name">Baton Rouge, La.</span>
+                    </td>
+                    <td>1:00 PM</td>
                 </tr>
                 <tr class="home-game" data-date="2026-02-15" data-time="13:00">
-                    <td>Sun, Feb 15</td><td>Milwaukee</td><td class="location-col">Baton Rouge, La.</td><td>1:00 PM</td>
+                    <td>Sun, Feb 15</td>
+                    <td>Milwaukee</td>
+                    <td class="location-col">
+                        <span class="stadium-name">Alex Box Stadium</span>
+                        <span class="city-name">Baton Rouge, La.</span>
+                    </td>
+                    <td>1:00 PM</td>
                 </tr>
                 <tr class="home-game" data-date="2026-02-16" data-time="TBA">
-                    <td>Mon, Feb 16</td><td>Kent State</td><td class="location-col">Baton Rouge, La.</td><td>TBA</td>
+                    <td>Mon, Feb 16</td>
+                    <td>Kent State</td>
+                    <td class="location-col">
+                        <span class="stadium-name">Alex Box Stadium</span>
+                        <span class="city-name">Baton Rouge, La.</span>
+                    </td>
+                    <td>TBA</td>
                 </tr>
                 <tr class="home-game" data-date="2026-02-18" data-time="18:30">
-                    <td>Wed, Feb 18</td><td>Nicholls</td><td class="location-col">Baton Rouge, La.</td><td>6:30 PM</td>
+                    <td>Wed, Feb 18</td>
+                    <td>Nicholls</td>
+                    <td class="location-col">
+                        <span class="stadium-name">Alex Box Stadium</span>
+                        <span class="city-name">Baton Rouge, La.</span>
+                    </td>
+                    <td>6:30 PM</td>
                 </tr>
                 <tr class="neutral-game" data-date="2026-02-20" data-time="13:00">
-                    <td>Fri, Feb 20</td><td>Indiana (Jax Classic)</td><td class="location-col">Jacksonville, Fla.</td><td>1:00 PM</td>
+                    <td>Fri, Feb 20</td>
+                    <td>Indiana <br><small>Jax College Classic</small></td>
+                    <td class="location-col">
+                        <span class="stadium-name">VyStar Ballpark</span>
+                        <span class="city-name">Jacksonville, Fla.</span>
+                    </td>
+                    <td>1:00 PM</td>
                 </tr>
                 <tr class="neutral-game" data-date="2026-02-21" data-time="11:00">
-                    <td>Sat, Feb 21</td><td>Notre Dame (Jax Classic)</td><td class="location-col">Jacksonville, Fla.</td><td>11:00 AM</td>
+                    <td>Sat, Feb 21</td>
+                    <td>Notre Dame <br><small>Jax College Classic</small></td>
+                    <td class="location-col">
+                        <span class="stadium-name">VyStar Ballpark</span>
+                        <span class="city-name">Jacksonville, Fla.</span>
+                    </td>
+                    <td>11:00 AM</td>
                 </tr>
                 <tr class="neutral-game" data-date="2026-02-22" data-time="14:00">
-                    <td>Sun, Feb 22</td><td>Central Florida (Jax Classic)</td><td class="location-col">Jacksonville, Fla.</td><td>2:00 PM</td>
+                    <td>Sun, Feb 22</td>
+                    <td>Central Florida <br><small>Jax College Classic</small></td>
+                    <td class="location-col">
+                        <span class="stadium-name">VyStar Ballpark</span>
+                        <span class="city-name">Jacksonville, Fla.</span>
+                    </td>
+                    <td>2:00 PM</td>
                 </tr>
                 <tr class="home-game" data-date="2026-02-24" data-time="14:00">
-                    <td>Tue, Feb 24</td><td>McNeese</td><td class="location-col">Baton Rouge, La.</td><td>2:00 PM</td>
+                    <td>Tue, Feb 24</td>
+                    <td>McNeese</td>
+                    <td class="location-col">
+                        <span class="stadium-name">Alex Box Stadium</span>
+                        <span class="city-name">Baton Rouge, La.</span>
+                    </td>
+                    <td>2:00 PM</td>
                 </tr>
                 <tr class="home-game" data-date="2026-02-27" data-time="18:30">
-                    <td>Fri, Feb 27</td><td>Sacramento State</td><td class="location-col">Baton Rouge, La.</td><td>6:30 PM</td>
+                    <td>Fri, Feb 27</td>
+                    <td>Sacramento State</td>
+                    <td class="location-col">
+                        <span class="stadium-name">Alex Box Stadium</span>
+                        <span class="city-name">Baton Rouge, La.</span>
+                    </td>
+                    <td>6:30 PM</td>
                 </tr>
                 <tr class="home-game" data-date="2026-02-28" data-time="14:00">
-                    <td>Sat, Feb 28</td><td>Sacramento State</td><td class="location-col">Baton Rouge, La.</td><td>2:00 PM</td>
+                    <td>Sat, Feb 28</td>
+                    <td>Sacramento State</td>
+                    <td class="location-col">
+                        <span class="stadium-name">Alex Box Stadium</span>
+                        <span class="city-name">Baton Rouge, La.</span>
+                    </td>
+                    <td>2:00 PM</td>
                 </tr>
 
                 <tr class="home-game" data-date="2026-03-01" data-time="13:00">
-                    <td>Sun, Mar 1</td><td>Sacramento State</td><td class="location-col">Baton Rouge, La.</td><td>1:00 PM</td>
+                    <td>Sun, Mar 1</td>
+                    <td>Sacramento State</td>
+                    <td class="location-col">
+                        <span class="stadium-name">Alex Box Stadium</span>
+                        <span class="city-name">Baton Rouge, La.</span>
+                    </td>
+                    <td>1:00 PM</td>
                 </tr>
                 <tr class="away-game" data-date="2026-03-04" data-time="18:00">
-                    <td>Wed, Mar 4</td><td>UL-Lafayette</td><td class="location-col">Lafayette, La.</td><td>6:00 PM</td>
+                    <td>Wed, Mar 4</td>
+                    <td>UL-Lafayette</td>
+                    <td class="location-col">
+                        <span class="stadium-name">Russo Park</span>
+                        <span class="city-name">Lafayette, La.</span>
+                    </td>
+                    <td>6:00 PM</td>
                 </tr>
                 <tr class="home-game" data-date="2026-03-06" data-time="18:30">
-                    <td>Fri, Mar 6</td><td>Dartmouth</td><td class="location-col">Baton Rouge, La.</td><td>6:30 PM</td>
+                    <td>Fri, Mar 6</td>
+                    <td>Dartmouth</td>
+                    <td class="location-col">
+                        <span class="stadium-name">Alex Box Stadium</span>
+                        <span class="city-name">Baton Rouge, La.</span>
+                    </td>
+                    <td>6:30 PM</td>
                 </tr>
                 <tr class="home-game" data-date="2026-03-07" data-time="18:00">
-                    <td>Sat, Mar 7</td><td>Dartmouth</td><td class="location-col">Baton Rouge, La.</td><td>6:00 PM</td>
+                    <td>Sat, Mar 7</td>
+                    <td>Dartmouth</td>
+                    <td class="location-col">
+                        <span class="stadium-name">Alex Box Stadium</span>
+                        <span class="city-name">Baton Rouge, La.</span>
+                    </td>
+                    <td>6:00 PM</td>
                 </tr>
                 <tr class="home-game" data-date="2026-03-08" data-time="13:00">
-                    <td>Sun, Mar 8</td><td>Dartmouth</td><td class="location-col">Baton Rouge, La.</td><td>1:00 PM</td>
+                    <td>Sun, Mar 8</td>
+                    <td>Dartmouth</td>
+                    <td class="location-col">
+                        <span class="stadium-name">Alex Box Stadium</span>
+                        <span class="city-name">Baton Rouge, La.</span>
+                    </td>
+                    <td>1:00 PM</td>
                 </tr>
                 <tr class="home-game" data-date="2026-03-10" data-time="18:30">
-                    <td>Tue, Mar 10</td><td>Northeastern</td><td class="location-col">Baton Rouge, La.</td><td>6:30 PM</td>
+                    <td>Tue, Mar 10</td>
+                    <td>Northeastern</td>
+                    <td class="location-col">
+                        <span class="stadium-name">Alex Box Stadium</span>
+                        <span class="city-name">Baton Rouge, La.</span>
+                    </td>
+                    <td>6:30 PM</td>
                 </tr>
                 <tr class="home-game" data-date="2026-03-11" data-time="TBA">
-                    <td>Wed, Mar 11</td><td>Creighton</td><td class="location-col">Baton Rouge, La.</td><td>TBA</td>
+                    <td>Wed, Mar 11</td>
+                    <td>Creighton</td>
+                    <td class="location-col">
+                        <span class="stadium-name">Alex Box Stadium</span>
+                        <span class="city-name">Baton Rouge, La.</span>
+                    </td>
+                    <td>TBA</td>
                 </tr>
                 <tr class="away-game" data-date="2026-03-13" data-time="18:00">
-                    <td>Fri, Mar 13</td><td>Vanderbilt</td><td class="location-col">Nashville, Tenn.</td><td>6:00 PM</td>
+                    <td>Fri, Mar 13</td>
+                    <td>Vanderbilt</td>
+                    <td class="location-col">
+                        <span class="stadium-name">Charles Hawkins Field</span>
+                        <span class="city-name">Nashville, Tenn.</span>
+                    </td>
+                    <td>6:00 PM</td>
                 </tr>
                 <tr class="away-game" data-date="2026-03-14" data-time="15:00">
-                    <td>Sat, Mar 14</td><td>Vanderbilt</td><td class="location-col">Nashville, Tenn.</td><td>3:00 PM</td>
+                    <td>Sat, Mar 14</td>
+                    <td>Vanderbilt</td>
+                    <td class="location-col">
+                        <span class="stadium-name">Charles Hawkins Field</span>
+                        <span class="city-name">Nashville, Tenn.</span>
+                    </td>
+                    <td>3:00 PM</td>
                 </tr>
                 <tr class="away-game" data-date="2026-03-15" data-time="13:00">
-                    <td>Sun, Mar 15</td><td>Vanderbilt</td><td class="location-col">Nashville, Tenn.</td><td>1:00 PM</td>
+                    <td>Sun, Mar 15</td>
+                    <td>Vanderbilt</td>
+                    <td class="location-col">
+                        <span class="stadium-name">Charles Hawkins Field</span>
+                        <span class="city-name">Nashville, Tenn.</span>
+                    </td>
+                    <td>1:00 PM</td>
                 </tr>
                 <tr class="home-game" data-date="2026-03-17" data-time="18:30">
-                    <td>Tue, Mar 17</td><td>Grambling State</td><td class="location-col">Baton Rouge, La.</td><td>6:30 PM</td>
+                    <td>Tue, Mar 17</td>
+                    <td>Grambling State</td>
+                    <td class="location-col">
+                        <span class="stadium-name">Alex Box Stadium</span>
+                        <span class="city-name">Baton Rouge, La.</span>
+                    </td>
+                    <td>6:30 PM</td>
                 </tr>
                 <tr class="home-game" data-date="2026-03-19" data-time="19:00">
-                    <td>Thu, Mar 19</td><td>Southern</td><td class="location-col">Baton Rouge, La.</td><td>7:00 PM</td>
+                    <td>Thu, Mar 19</td>
+                    <td>Southern</td>
+                    <td class="location-col">
+                        <span class="stadium-name">Alex Box Stadium</span>
+                        <span class="city-name">Baton Rouge, La.</span>
+                    </td>
+                    <td>7:00 PM</td>
                 </tr>
                 <tr class="home-game" data-date="2026-03-20" data-time="18:30">
-                    <td>Fri, Mar 20</td><td>Oklahoma</td><td class="location-col">Baton Rouge, La.</td><td>6:30 PM</td>
+                    <td>Fri, Mar 20</td>
+                    <td>Oklahoma</td>
+                    <td class="location-col">
+                        <span class="stadium-name">Alex Box Stadium</span>
+                        <span class="city-name">Baton Rouge, La.</span>
+                    </td>
+                    <td>6:30 PM</td>
                 </tr>
                 <tr class="home-game" data-date="2026-03-21" data-time="14:00">
-                    <td>Sat, Mar 21</td><td>Oklahoma</td><td class="location-col">Baton Rouge, La.</td><td>2:00 PM</td>
+                    <td>Sat, Mar 21</td>
+                    <td>Oklahoma</td>
+                    <td class="location-col">
+                        <span class="stadium-name">Alex Box Stadium</span>
+                        <span class="city-name">Baton Rouge, La.</span>
+                    </td>
+                    <td>2:00 PM</td>
                 </tr>
                 <tr class="home-game" data-date="2026-03-22" data-time="13:00">
-                    <td>Sun, Mar 22</td><td>Oklahoma</td><td class="location-col">Baton Rouge, La.</td><td>1:00 PM</td>
+                    <td>Sun, Mar 22</td>
+                    <td>Oklahoma</td>
+                    <td class="location-col">
+                        <span class="stadium-name">Alex Box Stadium</span>
+                        <span class="city-name">Baton Rouge, La.</span>
+                    </td>
+                    <td>1:00 PM</td>
                 </tr>
                 <tr class="home-game" data-date="2026-03-24" data-time="18:30">
-                    <td>Tue, Mar 24</td><td>Louisiana Tech</td><td class="location-col">Baton Rouge, La.</td><td>6:30 PM</td>
+                    <td>Tue, Mar 24</td>
+                    <td>Louisiana Tech</td>
+                    <td class="location-col">
+                        <span class="stadium-name">Alex Box Stadium</span>
+                        <span class="city-name">Baton Rouge, La.</span>
+                    </td>
+                    <td>6:30 PM</td>
                 </tr>
                 <tr class="home-game" data-date="2026-03-27" data-time="18:30">
-                    <td>Fri, Mar 27</td><td>Kentucky</td><td class="location-col">Baton Rouge, La.</td><td>6:30 PM</td>
+                    <td>Fri, Mar 27</td>
+                    <td>Kentucky</td>
+                    <td class="location-col">
+                        <span class="stadium-name">Alex Box Stadium</span>
+                        <span class="city-name">Baton Rouge, La.</span>
+                    </td>
+                    <td>6:30 PM</td>
                 </tr>
                 <tr class="home-game" data-date="2026-03-28" data-time="14:00">
-                    <td>Sat, Mar 28</td><td>Kentucky</td><td class="location-col">Baton Rouge, La.</td><td>2:00 PM</td>
+                    <td>Sat, Mar 28</td>
+                    <td>Kentucky</td>
+                    <td class="location-col">
+                        <span class="stadium-name">Alex Box Stadium</span>
+                        <span class="city-name">Baton Rouge, La.</span>
+                    </td>
+                    <td>2:00 PM</td>
                 </tr>
                 <tr class="home-game" data-date="2026-03-29" data-time="12:00">
-                    <td>Sun, Mar 29</td><td>Kentucky</td><td class="location-col">Baton Rouge, La.</td><td>12:00 PM</td>
+                    <td>Sun, Mar 29</td>
+                    <td>Kentucky</td>
+                    <td class="location-col">
+                        <span class="stadium-name">Alex Box Stadium</span>
+                        <span class="city-name">Baton Rouge, La.</span>
+                    </td>
+                    <td>12:00 PM</td>
                 </tr>
                 <tr class="home-game" data-date="2026-03-31" data-time="18:30">
-                    <td>Tue, Mar 31</td><td>Bethune-Cookman</td><td class="location-col">Baton Rouge, La.</td><td>6:30 PM</td>
+                    <td>Tue, Mar 31</td>
+                    <td>Bethune-Cookman</td>
+                    <td class="location-col">
+                        <span class="stadium-name">Alex Box Stadium</span>
+                        <span class="city-name">Baton Rouge, La.</span>
+                    </td>
+                    <td>6:30 PM</td>
                 </tr>
 
                 <tr class="away-game" data-date="2026-04-03" data-time="16:30">
-                    <td>Fri, Apr 3</td><td>Tennessee</td><td class="location-col">Knoxville, Tenn.</td><td>4:30 PM</td>
+                    <td>Fri, Apr 3</td>
+                    <td>Tennessee</td>
+                    <td class="location-col">
+                        <span class="stadium-name">Lindsey Nelson Stadium</span>
+                        <span class="city-name">Knoxville, Tenn.</span>
+                    </td>
+                    <td>4:30 PM</td>
                 </tr>
                 <tr class="away-game" data-date="2026-04-04" data-time="17:00">
-                    <td>Sat, Apr 4</td><td>Tennessee</td><td class="location-col">Knoxville, Tenn.</td><td>5:00 PM</td>
+                    <td>Sat, Apr 4</td>
+                    <td>Tennessee</td>
+                    <td class="location-col">
+                        <span class="stadium-name">Lindsey Nelson Stadium</span>
+                        <span class="city-name">Knoxville, Tenn.</span>
+                    </td>
+                    <td>5:00 PM</td>
                 </tr>
                 <tr class="away-game" data-date="2026-04-05" data-time="12:00">
-                    <td>Sun, Apr 5</td><td>Tennessee</td><td class="location-col">Knoxville, Tenn.</td><td>12:00 PM</td>
+                    <td>Sun, Apr 5</td>
+                    <td>Tennessee</td>
+                    <td class="location-col">
+                        <span class="stadium-name">Lindsey Nelson Stadium</span>
+                        <span class="city-name">Knoxville, Tenn.</span>
+                    </td>
+                    <td>12:00 PM</td>
                 </tr>
                 <tr class="home-game" data-date="2026-04-07" data-time="18:30">
-                    <td>Tue, Apr 7</td><td>New Orleans</td><td class="location-col">Baton Rouge, La.</td><td>6:30 PM</td>
+                    <td>Tue, Apr 7</td>
+                    <td>New Orleans</td>
+                    <td class="location-col">
+                        <span class="stadium-name">Alex Box Stadium</span>
+                        <span class="city-name">Baton Rouge, La.</span>
+                    </td>
+                    <td>6:30 PM</td>
                 </tr>
                 <tr class="away-game" data-date="2026-04-10" data-time="18:30">
-                    <td>Fri, Apr 10</td><td>Ole Miss</td><td class="location-col">Oxford, Miss.</td><td>6:30 PM</td>
+                    <td>Fri, Apr 10</td>
+                    <td>Ole Miss</td>
+                    <td class="location-col">
+                        <span class="stadium-name">Swayze Field</span>
+                        <span class="city-name">Oxford, Miss.</span>
+                    </td>
+                    <td>6:30 PM</td>
                 </tr>
                 <tr class="away-game" data-date="2026-04-11" data-time="16:00">
-                    <td>Sat, Apr 11</td><td>Ole Miss</td><td class="location-col">Oxford, Miss.</td><td>4:00 PM</td>
+                    <td>Sat, Apr 11</td>
+                    <td>Ole Miss</td>
+                    <td class="location-col">
+                        <span class="stadium-name">Swayze Field</span>
+                        <span class="city-name">Oxford, Miss.</span>
+                    </td>
+                    <td>4:00 PM</td>
                 </tr>
                 <tr class="away-game" data-date="2026-04-12" data-time="13:30">
-                    <td>Sun, Apr 12</td><td>Ole Miss</td><td class="location-col">Oxford, Miss.</td><td>1:30 PM</td>
+                    <td>Sun, Apr 12</td>
+                    <td>Ole Miss</td>
+                    <td class="location-col">
+                        <span class="stadium-name">Swayze Field</span>
+                        <span class="city-name">Oxford, Miss.</span>
+                    </td>
+                    <td>1:30 PM</td>
                 </tr>
                 <tr class="home-game" data-date="2026-04-14" data-time="18:30">
-                    <td>Tue, Apr 14</td><td>Northwestern State</td><td class="location-col">Baton Rouge, La.</td><td>6:30 PM</td>
+                    <td>Tue, Apr 14</td>
+                    <td>Northwestern State</td>
+                    <td class="location-col">
+                        <span class="stadium-name">Alex Box Stadium</span>
+                        <span class="city-name">Baton Rouge, La.</span>
+                    </td>
+                    <td>6:30 PM</td>
                 </tr>
                 <tr class="home-game" data-date="2026-04-17" data-time="18:00">
-                    <td>Fri, Apr 17</td><td>Texas A&M</td><td class="location-col">Baton Rouge, La.</td><td>6:00 PM</td>
+                    <td>Fri, Apr 17</td>
+                    <td>Texas A&M</td>
+                    <td class="location-col">
+                        <span class="stadium-name">Alex Box Stadium</span>
+                        <span class="city-name">Baton Rouge, La.</span>
+                    </td>
+                    <td>6:00 PM</td>
                 </tr>
                 <tr class="home-game" data-date="2026-04-18" data-time="19:00">
-                    <td>Sat, Apr 18</td><td>Texas A&M</td><td class="location-col">Baton Rouge, La.</td><td>7:00 PM</td>
+                    <td>Sat, Apr 18</td>
+                    <td>Texas A&M</td>
+                    <td class="location-col">
+                        <span class="stadium-name">Alex Box Stadium</span>
+                        <span class="city-name">Baton Rouge, La.</span>
+                    </td>
+                    <td>7:00 PM</td>
                 </tr>
                 <tr class="home-game" data-date="2026-04-19" data-time="13:00">
-                    <td>Sun, Apr 19</td><td>Texas A&M</td><td class="location-col">Baton Rouge, La.</td><td>1:00 PM</td>
+                    <td>Sun, Apr 19</td>
+                    <td>Texas A&M</td>
+                    <td class="location-col">
+                        <span class="stadium-name">Alex Box Stadium</span>
+                        <span class="city-name">Baton Rouge, La.</span>
+                    </td>
+                    <td>1:00 PM</td>
                 </tr>
                 <tr class="home-game" data-date="2026-04-21" data-time="18:30">
-                    <td>Tue, Apr 21</td><td>New Orleans</td><td class="location-col">Baton Rouge, La.</td><td>6:30 PM</td>
+                    <td>Tue, Apr 21</td>
+                    <td>New Orleans</td>
+                    <td class="location-col">
+                        <span class="stadium-name">Alex Box Stadium</span>
+                        <span class="city-name">Baton Rouge, La.</span>
+                    </td>
+                    <td>6:30 PM</td>
                 </tr>
                 <tr class="away-game" data-date="2026-04-24" data-time="18:00">
-                    <td>Fri, Apr 24</td><td>Mississippi State</td><td class="location-col">Starkville, Miss.</td><td>6:00 PM</td>
+                    <td>Fri, Apr 24</td>
+                    <td>Mississippi State</td>
+                    <td class="location-col">
+                        <span class="stadium-name">Dudy Noble Field</span>
+                        <span class="city-name">Starkville, Miss.</span>
+                    </td>
+                    <td>6:00 PM</td>
                 </tr>
                 <tr class="away-game" data-date="2026-04-25" data-time="18:30">
-                    <td>Sat, Apr 25</td><td>Mississippi State</td><td class="location-col">Starkville, Miss.</td><td>6:30 PM</td>
+                    <td>Sat, Apr 25</td>
+                    <td>Mississippi State</td>
+                    <td class="location-col">
+                        <span class="stadium-name">Dudy Noble Field</span>
+                        <span class="city-name">Starkville, Miss.</span>
+                    </td>
+                    <td>6:30 PM</td>
                 </tr>
                 <tr class="away-game" data-date="2026-04-26" data-time="13:00">
-                    <td>Sun, Apr 26</td><td>Mississippi State</td><td class="location-col">Starkville, Miss.</td><td>1:00 PM</td>
+                    <td>Sun, Apr 26</td>
+                    <td>Mississippi State</td>
+                    <td class="location-col">
+                        <span class="stadium-name">Dudy Noble Field</span>
+                        <span class="city-name">Starkville, Miss.</span>
+                    </td>
+                    <td>1:00 PM</td>
                 </tr>
                 <tr class="home-game" data-date="2026-04-28" data-time="18:30">
-                    <td>Tue, Apr 28</td><td>SE Louisiana</td><td class="location-col">Baton Rouge, La.</td><td>6:30 PM</td>
+                    <td>Tue, Apr 28</td>
+                    <td>SE Louisiana</td>
+                    <td class="location-col">
+                        <span class="stadium-name">Alex Box Stadium</span>
+                        <span class="city-name">Baton Rouge, La.</span>
+                    </td>
+                    <td>6:30 PM</td>
                 </tr>
 
                 <tr class="home-game" data-date="2026-05-01" data-time="18:30">
-                    <td>Fri, May 1</td><td>South Carolina</td><td class="location-col">Baton Rouge, La.</td><td>6:30 PM</td>
+                    <td>Fri, May 1</td>
+                    <td>South Carolina</td>
+                    <td class="location-col">
+                        <span class="stadium-name">Alex Box Stadium</span>
+                        <span class="city-name">Baton Rouge, La.</span>
+                    </td>
+                    <td>6:30 PM</td>
                 </tr>
                 <tr class="home-game" data-date="2026-05-02" data-time="18:00">
-                    <td>Sat, May 2</td><td>South Carolina</td><td class="location-col">Baton Rouge, La.</td><td>6:00 PM</td>
+                    <td>Sat, May 2</td>
+                    <td>South Carolina</td>
+                    <td class="location-col">
+                        <span class="stadium-name">Alex Box Stadium</span>
+                        <span class="city-name">Baton Rouge, La.</span>
+                    </td>
+                    <td>6:00 PM</td>
                 </tr>
                 <tr class="home-game" data-date="2026-05-03" data-time="14:00">
-                    <td>Sun, May 3</td><td>South Carolina</td><td class="location-col">Baton Rouge, La.</td><td>2:00 PM</td>
+                    <td>Sun, May 3</td>
+                    <td>South Carolina</td>
+                    <td class="location-col">
+                        <span class="stadium-name">Alex Box Stadium</span>
+                        <span class="city-name">Baton Rouge, La.</span>
+                    </td>
+                    <td>2:00 PM</td>
                 </tr>
                 <tr class="home-game" data-date="2026-05-05" data-time="18:30">
-                    <td>Tue, May 5</td><td>Tulane</td><td class="location-col">Baton Rouge, La.</td><td>6:30 PM</td>
+                    <td>Tue, May 5</td>
+                    <td>Tulane</td>
+                    <td class="location-col">
+                        <span class="stadium-name">Alex Box Stadium</span>
+                        <span class="city-name">Baton Rouge, La.</span>
+                    </td>
+                    <td>6:30 PM</td>
                 </tr>
                 <tr class="away-game" data-date="2026-05-08" data-time="17:00">
-                    <td>Fri, May 8</td><td>Georgia</td><td class="location-col">Athens, Ga.</td><td>5:00 PM</td>
+                    <td>Fri, May 8</td>
+                    <td>Georgia</td>
+                    <td class="location-col">
+                        <span class="stadium-name">Foley Field</span>
+                        <span class="city-name">Athens, Ga.</span>
+                    </td>
+                    <td>5:00 PM</td>
                 </tr>
                 <tr class="away-game" data-date="2026-05-09" data-time="18:00">
-                    <td>Sat, May 9</td><td>Georgia</td><td class="location-col">Athens, Ga.</td><td>6:00 PM</td>
+                    <td>Sat, May 9</td>
+                    <td>Georgia</td>
+                    <td class="location-col">
+                        <span class="stadium-name">Foley Field</span>
+                        <span class="city-name">Athens, Ga.</span>
+                    </td>
+                    <td>6:00 PM</td>
                 </tr>
                 <tr class="away-game" data-date="2026-05-10" data-time="TBA">
-                    <td>Sun, May 10</td><td>Georgia</td><td class="location-col">Athens, Ga.</td><td>TBA</td>
+                    <td>Sun, May 10</td>
+                    <td>Georgia</td>
+                    <td class="location-col">
+                        <span class="stadium-name">Foley Field</span>
+                        <span class="city-name">Athens, Ga.</span>
+                    </td>
+                    <td>TBA</td>
                 </tr>
                 <tr class="home-game" data-date="2026-05-14" data-time="18:30">
-                    <td>Thu, May 14</td><td>Florida</td><td class="location-col">Baton Rouge, La.</td><td>6:30 PM</td>
+                    <td>Thu, May 14</td>
+                    <td>Florida</td>
+                    <td class="location-col">
+                        <span class="stadium-name">Alex Box Stadium</span>
+                        <span class="city-name">Baton Rouge, La.</span>
+                    </td>
+                    <td>6:30 PM</td>
                 </tr>
                 <tr class="home-game" data-date="2026-05-15" data-time="18:30">
-                    <td>Fri, May 15</td><td>Florida</td><td class="location-col">Baton Rouge, La.</td><td>6:30 PM</td>
+                    <td>Fri, May 15</td>
+                    <td>Florida</td>
+                    <td class="location-col">
+                        <span class="stadium-name">Alex Box Stadium</span>
+                        <span class="city-name">Baton Rouge, La.</span>
+                    </td>
+                    <td>6:30 PM</td>
                 </tr>
                 <tr class="home-game" data-date="2026-05-16" data-time="14:00">
-                    <td>Sat, May 16</td><td>Florida</td><td class="location-col">Baton Rouge, La.</td><td>2:00 PM</td>
+                    <td>Sat, May 16</td>
+                    <td>Florida</td>
+                    <td class="location-col">
+                        <span class="stadium-name">Alex Box Stadium</span>
+                        <span class="city-name">Baton Rouge, La.</span>
+                    </td>
+                    <td>2:00 PM</td>
                 </tr>
             </tbody>
         </table>
@@ -399,7 +736,6 @@
 
 <script>
     // --- SCHEDULE DATA EXTRACTOR ---
-    // We scrape the HTML data attributes we added to build the JS schedule array dynamically
     function getSchedule() {
         const rows = document.querySelectorAll('#schedule-body tr');
         const schedule = [];
@@ -409,11 +745,18 @@
             const timeStr = row.getAttribute('data-time');
             const cols = row.querySelectorAll('td');
             
+            // Extract text cleanly from the new HTML structure
+            const date = cols[0].innerText;
+            const opponent = cols[1].innerText.replace('Jax College Classic', '').trim();
+            // Get location text (Stadium + City)
+            const location = cols[2].innerText.replace('\n', ', ');
+            const time = cols[3].innerText;
+            
             schedule.push({
-                displayDate: cols[0].innerText,
-                opponent: cols[1].innerText,
-                location: cols[2].innerText,
-                displayTime: cols[3].innerText,
+                displayDate: date,
+                opponent: opponent,
+                location: location,
+                displayTime: time,
                 isoDate: dateStr,
                 isoTime: timeStr
             });
@@ -424,16 +767,10 @@
     const schedule = getSchedule();
 
     function updateNextGame() {
-        // Use a fixed date for demo purposes or 'new Date()' for real life.
-        // Since the schedule is for 2026, real 'new Date()' would show "Season Over" if run today (2025).
-        // UNCOMMENT the line below for production 2026 use:
-        // const now = new Date(); 
-        
-        // FOR DEMO: Let's simulate a date so you can see it working (e.g., Mid-Feb 2026)
         const now = new Date(); 
-        // If current year is not 2026, this logic prevents "Season Over" message for testing.
+        
+        // FOR DEMO: If viewing before 2026, pretend it is Feb 12, 2026
         if (now.getFullYear() < 2026) {
-             // If viewing in 2025, we pretend it's Feb 12, 2026 so the first game shows
              now.setFullYear(2026);
              now.setMonth(1); // Feb
              now.setDate(12);
@@ -442,37 +779,30 @@
         let nextGame = null;
         let isLive = false;
 
-        // Loop to find the first game that hasn't finished yet
         for (let game of schedule) {
-            // Parse Game Time
             let gameStart = new Date(game.isoDate);
             
             if (game.isoTime !== 'TBA') {
                 const [hours, minutes] = game.isoTime.split(':');
                 gameStart.setHours(parseInt(hours), parseInt(minutes));
             } else {
-                // If TBA, assume it's valid until the end of the day
                 gameStart.setHours(23, 59);
             }
 
-            // Calculate Approximate Game End (Start + 4 Hours)
             const gameEnd = new Date(gameStart);
             gameEnd.setHours(gameStart.getHours() + 4);
 
             if (now < gameStart) {
-                // Future Game found
                 nextGame = game;
                 nextGame.startDateObj = gameStart;
                 isLive = false;
                 break;
             } else if (now >= gameStart && now <= gameEnd) {
-                // Currently playing
                 nextGame = game;
                 nextGame.startDateObj = gameStart;
                 isLive = true;
                 break;
             }
-            // If now > gameEnd, loop continues to next game
         }
 
         renderPreview(nextGame, isLive, now);
@@ -482,7 +812,6 @@
         const card = document.getElementById('next-game-card');
         
         if (!game) {
-            // Season Over or No Data
             card.style.display = 'none';
             return;
         }
@@ -504,7 +833,6 @@
             countdownEl.style.fontWeight = 'bold';
         } else {
             badge.style.display = 'none';
-            // Simple Days calculation
             const diffTime = Math.abs(game.startDateObj - now);
             const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
             
@@ -519,10 +847,7 @@
         }
     }
 
-    // Run on load
     updateNextGame();
-
-    // Optional: Refresh every minute
     setInterval(updateNextGame, 60000);
 
 </script>
