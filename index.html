@@ -20,7 +20,7 @@
             justify-content: center;
             text-align: center;
             overflow: hidden;
-            user-select: none; /* Prevents highlighting text */
+            user-select: none;
         }
 
         /* SCREENS */
@@ -32,14 +32,18 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            overflow-y: auto; /* Allow scrolling for rules if needed */
         }
         .active { display: flex; }
 
         /* TYPOGRAPHY */
         h1 { font-size: 2.5rem; margin-bottom: 10px; color: #ff5252; }
         h2 { font-size: 1.8rem; margin-bottom: 20px; }
-        p { font-size: 1.2rem; color: #bbbbbb; margin-bottom: 30px; max-width: 300px; line-height: 1.5; }
+        p { font-size: 1.1rem; color: #bbbbbb; margin-bottom: 20px; max-width: 320px; line-height: 1.5; }
         
+        ul { text-align: left; max-width: 320px; color: #ccc; margin-bottom: 30px; padding-left: 20px; }
+        li { margin-bottom: 10px; line-height: 1.4; }
+
         .big-text {
             font-size: 3rem;
             font-weight: bold;
@@ -67,18 +71,27 @@
             cursor: pointer;
             transition: all 0.2s;
             min-width: 60px;
+            margin-bottom: 10px;
         }
         
         button:active { transform: scale(0.95); background: #444; }
         
         button.primary {
-            background-color: #ff5252; /* Red accent */
+            background-color: #ff5252;
             border-color: #ff5252;
             font-weight: bold;
             width: 100%;
             max-width: 300px;
             padding: 20px;
             font-size: 1.5rem;
+        }
+
+        button.secondary {
+            background: transparent;
+            border: 1px solid #444;
+            color: #888;
+            font-size: 1rem;
+            padding: 10px 20px;
         }
 
         /* CARD REVEAL AREA */
@@ -120,6 +133,21 @@
         </div>
 
         <button class="primary" onclick="startGame()">Start Game</button>
+        <button class="secondary" onclick="switchScreen('rules-screen')">How to Play</button>
+    </div>
+
+    <div id="rules-screen" class="screen">
+        <h2>How to Play</h2>
+        <ul>
+            <li><strong>The Secret:</strong> Everyone is at the same Location (e.g., "The Beach"), except for one person: <strong>The Mole</strong>.</li>
+            <li><strong>The Pass:</strong> Pass the phone. Hold the button to see your role. Don't let anyone else see!</li>
+            <li><strong>The Game:</strong> Once the timer starts, ask each other questions. 
+                <br><em>"Is it hot here?" "Why are you wearing that?"</em></li>
+            <li><strong>The Goal:</strong> 
+                <br>- <strong>Civilians:</strong> Vote to identify the Mole.
+                <br>- <strong>Mole:</strong> Blend in, or guess the Location correctly to steal the win.</li>
+        </ul>
+        <button class="primary" onclick="switchScreen('setup-screen')">Back</button>
     </div>
 
     <div id="pass-screen" class="screen">
@@ -187,6 +215,7 @@
     // --- DOM ELEMENTS ---
     const screens = {
         setup: document.getElementById('setup-screen'),
+        rules: document.getElementById('rules-screen'),
         pass: document.getElementById('pass-screen'),
         game: document.getElementById('game-screen'),
         result: document.getElementById('result-screen')
@@ -194,9 +223,14 @@
 
     // --- FUNCTIONS ---
 
-    function switchScreen(screenName) {
+    function switchScreen(screenId) {
         Object.values(screens).forEach(s => s.classList.remove('active'));
-        screens[screenName].classList.add('active');
+        // Handle direct ID or short name
+        if(screens[screenId]) {
+            screens[screenId].classList.add('active');
+        } else if (document.getElementById(screenId)) {
+            document.getElementById(screenId).classList.add('active');
+        }
     }
 
     function adjustPlayers(num) {
@@ -214,7 +248,7 @@
         
         // UI Reset
         updatePassScreen();
-        switchScreen('pass');
+        switchScreen('pass-screen');
     }
 
     function updatePassScreen() {
@@ -263,7 +297,7 @@
     }
 
     function startTimer() {
-        switchScreen('game');
+        switchScreen('game-screen');
         let duration = 8 * 60; // 8 minutes
         const display = document.getElementById('timer-display');
         
@@ -275,7 +309,6 @@
             updateTimerDisplay(duration, display);
             if (duration <= 0) {
                 clearInterval(timerInterval);
-                // Optional: Play a sound or turn red here
             }
         }, 1000);
     }
@@ -290,11 +323,11 @@
         clearInterval(timerInterval);
         document.getElementById('reveal-location').innerText = currentLocation;
         document.getElementById('reveal-mole').innerText = `Player ${moleIndex}`;
-        switchScreen('result');
+        switchScreen('result-screen');
     }
 
     function resetGame() {
-        switchScreen('setup');
+        switchScreen('setup-screen');
     }
 </script>
 </body>
