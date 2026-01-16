@@ -14,127 +14,158 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f7f4; /* Very light green-grey tint */
-            color: #333;
+            background-color: #f4f1ea; /* Warm beige/parchment background */
+            color: #2c2c2c;
             line-height: 1.6;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
         }
 
-        /* --- COLOR PALETTE --- */
+        /* --- COLOR PALETTE (Outdoor Aesthetic) --- */
         :root {
-            --forest-green: #228B22;
-            --dark-forest: #1a5e1a;
-            --light-accent: #e8f5e9;
+            --hunter-green: #1a3c34;  /* Very dark green */
+            --forest-green: #2d5a27;  /* Classic forest green */
+            --earth-brown: #8b5a2b;   /* Wood/Earth tone */
+            --sky-accent: #e0f2f1;    /* Very faint sky hint */
             --text-white: #ffffff;
+            --gold-accent: #d4af37;   /* Subtle gold (nature/LSU nod) */
         }
 
         /* --- HEADER SECTION --- */
         header {
-            background: linear-gradient(135deg, var(--dark-forest), var(--forest-green));
+            background: linear-gradient(to bottom, var(--hunter-green), var(--forest-green));
             color: var(--text-white);
-            padding: 3rem 1rem;
+            padding-top: 4rem;
+            padding-bottom: 0;
             text-align: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
         }
 
         header h1 {
-            font-size: 2.5rem;
+            font-size: 3rem;
             margin-bottom: 0.5rem;
-            font-weight: 700;
+            font-weight: 800;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 2;
         }
 
         header p {
-            font-size: 1.1rem;
-            opacity: 0.9;
+            font-size: 1.2rem;
+            opacity: 0.95;
             max-width: 600px;
-            margin: 0 auto;
+            margin: 0 auto 4rem auto;
+            position: relative;
+            z-index: 2;
         }
+
+        /* CSS Graphic: Abstract Mountain Shapes at bottom of header */
+        .scenery {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            overflow: hidden;
+            z-index: 1;
+        }
+        .mountain {
+            position: absolute;
+            bottom: -20px;
+            background-color: #f4f1ea; /* Matches body background */
+            transform: rotate(45deg);
+        }
+        .m-1 { left: -10%; width: 150px; height: 150px; }
+        .m-2 { left: 10%; width: 100px; height: 100px; bottom: -40px; }
+        .m-3 { left: 25%; width: 180px; height: 180px; bottom: -80px; }
+        .m-4 { right: 20%; width: 200px; height: 200px; bottom: -90px; }
+        .m-5 { right: -5%; width: 120px; height: 120px; bottom: -30px; }
 
         /* --- MAIN CONTAINER --- */
         main {
-            flex: 1; /* Pushes footer down */
+            flex: 1; 
             max-width: 1000px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 3rem 2rem;
             width: 100%;
         }
 
-        .intro {
+        .section-title {
             text-align: center;
             margin-bottom: 2rem;
-            color: #555;
+            color: var(--earth-brown);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: bold;
+            font-size: 0.9rem;
         }
 
         /* --- NAVIGATION GRID --- */
         .nav-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
         }
 
         /* --- LINK CARDS --- */
         .card {
             background: white;
-            border-radius: 12px;
+            border-radius: 8px; /* Slightly squarer for rugged look */
             padding: 2rem;
             text-decoration: none;
             color: #333;
-            border: 1px solid #e0e0e0;
-            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            border-bottom: 5px solid var(--forest-green); /* Green accent bar */
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
+            position: relative;
+            overflow: hidden;
         }
 
         .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(34, 139, 34, 0.15); /* Greenish shadow */
-            border-color: var(--forest-green);
+            transform: translateY(-7px);
+            box-shadow: 0 15px 25px rgba(26, 60, 52, 0.2);
+            border-bottom-color: var(--earth-brown);
         }
 
         .card-icon {
-            font-size: 2rem;
+            font-size: 2.5rem;
             margin-bottom: 1rem;
-            color: var(--forest-green);
-            background-color: var(--light-accent);
-            width: 60px;
-            height: 60px;
+            background-color: #fff9c4; /* Pale sun yellow */
+            width: 70px;
+            height: 70px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
+            border: 2px solid var(--gold-accent);
         }
 
         .card h3 {
             margin-bottom: 0.5rem;
-            color: var(--dark-forest);
+            color: var(--hunter-green);
+            font-size: 1.4rem;
         }
 
         .card p {
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             color: #666;
         }
 
         /* --- FOOTER --- */
         footer {
             text-align: center;
-            padding: 1.5rem;
-            background-color: var(--dark-forest);
-            color: var(--text-white);
+            padding: 2rem;
+            background-color: var(--hunter-green);
+            color: #aebdb8;
             font-size: 0.9rem;
             margin-top: auto;
-        }
-
-        footer a {
-            color: #a5d6a7;
-            text-decoration: none;
-        }
-
-        footer a:hover {
-            text-decoration: underline;
+            border-top: 4px solid var(--earth-brown);
         }
     </style>
 </head>
@@ -142,38 +173,46 @@
 
     <header>
         <h1>Blake Roussel</h1>
-        <p>Welcome to the central hub of my GitHub Pages repository.</p>
+        <p>Portfolio & Projects Hub</p>
+        
+        <div class="scenery">
+            <div class="mountain m-1"></div>
+            <div class="mountain m-2"></div>
+            <div class="mountain m-3"></div>
+            <div class="mountain m-4"></div>
+            <div class="mountain m-5"></div>
+        </div>
     </header>
 
-    main>
-        <div class="intro">
-            <p>Select a page below to navigate through the project files.</p>
-        </div>
+    <main>
+        <div class="section-title">Directory</div>
 
         <nav class="nav-grid">
+            
             <a href="index.html" class="card">
-                <div class="card-icon">🏠</div>
-                <h3>Main Index</h3>
-                <p>The root entry point of the website.</p>
-            </a>
-
-            <a href="contact.html" class="card">
-                <div class="card-icon">✉️</div>
-                <h3>Contact</h3>
-                <p>Get in touch or view contact information.</p>
-            </a>
-
-            <a href="examples.html" class="card">
-                <div class="card-icon">📂</div>
-                <h3>Examples</h3>
-                <p>View project examples and demonstrations.</p>
+                <div class="card-icon">🐹</div>
+                <h3>The Mole</h3>
+                <p>An interactive browser game. Can you find the mole?</p>
             </a>
 
             <a href="page.html" class="card">
-                <div class="card-icon">📄</div>
-                <h3>Page</h3>
-                <p>Additional content and details.</p>
+                <div class="card-icon">⚾</div>
+                <h3>LSU Baseball</h3>
+                <p>2025 Season Schedule and game details.</p>
             </a>
+
+            <a href="examples.html" class="card">
+                <div class="card-icon">🌲</div>
+                <h3>Examples</h3>
+                <p>Various project examples and demonstrations.</p>
+            </a>
+
+            <a href="contact.html" class="card">
+                <div class="card-icon">📮</div>
+                <h3>Contact</h3>
+                <p>Get in touch via email or social media.</p>
+            </a>
+            
         </nav>
     </main>
 
