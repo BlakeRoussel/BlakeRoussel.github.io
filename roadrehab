@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>St. James Parish - Road Rehab One Pager</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+            color: #1f2937;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        .page-container {
+            max-width: 8.5in;
+            margin: 2rem auto;
+            background: white;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+            min-height: 11in;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Gradient Header - Kept consistent */
+        .header-bg {
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+            color: white;
+        }
+
+        /* Card Styles */
+        .info-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-left: 4px solid #3b82f6;
+            border-radius: 0.5rem;
+        }
+
+        .benefit-icon {
+            background: #eff6ff;
+            color: #2563eb;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background-color: white;
+            }
+            .page-container {
+                margin: 0;
+                box-shadow: none;
+                max-width: 100%;
+                width: 100%;
+                min-height: auto;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .break-inside-avoid {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Print Control -->
+    <div class="fixed top-4 right-4 no-print z-50">
+        <button onclick="window.print()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow flex items-center gap-2">
+            <i class="fas fa-print"></i> Print / Save as PDF
+        </button>
+    </div>
+
+    <div class="page-container">
+        <!-- Header Section -->
+        <header class="header-bg p-8 pb-12 relative">
+            <div class="flex justify-between items-start">
+                <div>
+                    <h2 class="text-blue-200 text-sm font-bold uppercase tracking-wider mb-1">Capital Outlay Request • ID: 577377</h2>
+                    <h1 class="text-4xl font-extrabold mb-2 leading-tight">Parish-Wide Road<br>Rehabilitation</h1>
+                    <p class="text-blue-100 text-lg">St. James Parish Infrastructure Maintenance</p>
+                </div>
+                <div class="text-right text-blue-100 text-sm">
+                    <p class="font-semibold">Fiscal Year 2026-2027</p>
+                    <p class="mt-1">5800 LA-44, Convent, LA 70723</p>
+                    <div class="mt-3 inline-block bg-blue-500/30 px-3 py-1 rounded text-xs font-bold border border-blue-400/30">
+                        PRIORITY: 4
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="flex-grow px-8 -mt-8 grid grid-cols-12 gap-8 relative z-10">
+            
+            <!-- Left Column (Main Content) -->
+            <div class="col-span-8 space-y-8">
+                
+                <!-- Executive Summary -->
+                <section class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+                    <h3 class="text-gray-900 font-bold text-xl mb-3 flex items-center gap-2">
+                        <i class="fas fa-info-circle text-blue-600"></i> Executive Summary
+                    </h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        This project requests reauthorization of Capital Outlay funds to address the critical maintenance of St. James Parish's <strong>75.4-mile road network</strong>. Following comprehensive assessments in 2022, this phase targets the <strong>mill, patch, and overlay of approximately 5 miles</strong> of the most severely damaged roadways. This initiative is vital to catching up on maintenance backlogs caused by previous contractor defaults, the COVID-19 pandemic, and Hurricane Ida.
+                    </p>
+                </section>
+
+                <!-- Project Drivers & Benefits -->
+                <section>
+                    <h3 class="text-gray-900 font-bold text-xl mb-4 border-b pb-2">Project Drivers & Benefits</h3>
+                    
+                    <div class="grid grid-cols-1 gap-6">
+                        <!-- Benefit 1 -->
+                        <div class="flex gap-4">
+                            <div class="flex-shrink-0">
+                                <div class="benefit-icon">
+                                    <i class="fas fa-road text-xl"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Critical Infrastructure Recovery</h4>
+                                <p class="text-sm text-gray-600 mt-1">
+                                    Addresses the "severely damaged" tier of the parish road network. Without this intervention, the current maintenance cycle is projected to take over 20 years to complete.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Benefit 2 -->
+                        <div class="flex gap-4">
+                            <div class="flex-shrink-0">
+                                <div class="benefit-icon">
+                                    <i class="fas fa-chart-line text-xl"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Socioeconomic Impact</h4>
+                                <p class="text-sm text-gray-600 mt-1">
+                                    Transportation infrastructure is identified as having a substantial impact on all socioeconomic activities in the region, supporting local commerce and resident mobility.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Benefit 3 -->
+                        <div class="flex gap-4">
+                            <div class="flex-shrink-0">
+                                <div class="benefit-icon">
+                                    <i class="fas fa-history text-xl"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Strategic Stabilization</h4>
+                                <p class="text-sm text-gray-600 mt-1">
+                                    Stabilizes the maintenance program after years of external disruptions (2018 Surety execution, 2020-21 Pandemic/Hurricanes), ensuring a return to a consistent rehabilitation cycle.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Right Column (Financials & Sidebar) -->
+            <div class="col-span-4 space-y-6">
+                
+                <!-- The Ask Box -->
+                <div class="bg-slate-900 text-white p-6 rounded-lg shadow-lg break-inside-avoid">
+                    <h3 class="text-blue-300 font-bold text-xs uppercase tracking-widest mb-2">Total Project Cost</h3>
+                    <div class="text-4xl font-bold mb-1">$4,630,000</div>
+                    <div class="text-xs text-slate-400 mb-4">*Includes prior funding ($2.23M)</div>
+                    <div class="border-t border-slate-700 my-4"></div>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <div class="text-blue-200 text-xs font-semibold uppercase">State Funding Request (Year 1)</div>
+                            <div class="text-2xl font-bold text-white">$1,800,000</div>
+                        </div>
+                        <div>
+                            <div class="text-green-400 text-xs font-semibold uppercase">Local Match (Committed)</div>
+                            <div class="text-xl font-bold text-white">$600,000</div>
+                            <div class="text-xs text-slate-400">Parish Fund 084</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Budget Table -->
+                <div class="bg-white p-5 rounded-lg border border-gray-200 shadow-sm break-inside-avoid">
+                    <h4 class="font-bold text-gray-800 mb-3 text-sm border-b pb-2">Budget Breakdown</h4>
+                    <table class="w-full text-sm">
+                        <tbody class="divide-y divide-gray-100">
+                            <tr>
+                                <td class="py-2 text-gray-600">Construction</td>
+                                <td class="py-2 text-right font-medium">$3,858,334</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 text-gray-600">Planning (10%)</td>
+                                <td class="py-2 text-right font-medium">$385,833</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 text-gray-600">Contingency</td>
+                                <td class="py-2 text-right font-medium">$385,833</td>
+                            </tr>
+                            <tr class="bg-gray-50">
+                                <td class="py-2 font-bold text-gray-900 pl-2">Total</td>
+                                <td class="py-2 text-right font-bold text-gray-900 pr-2">$4,630,000</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Status Check -->
+                <div class="bg-green-50 p-5 rounded-lg border border-green-100 break-inside-avoid">
+                    <h4 class="font-bold text-green-900 mb-3 text-sm">Project Status</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li class="flex items-center gap-2">
+                            <i class="fas fa-check-circle text-green-600"></i>
+                            <span class="text-gray-700">Assessment Complete (2022)</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fas fa-money-check-alt text-green-600"></i>
+                            <span class="text-gray-700">Prior Funding: $2.23M</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fas fa-clock text-green-600"></i>
+                            <span class="text-gray-700">Target Start: Spring 2027</span>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="mt-auto bg-gray-50 border-t border-gray-200 p-8">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center gap-4">
+                    <div class="h-10 w-10 bg-slate-800 rounded-full flex items-center justify-center text-white font-bold text-sm">
+                        SJ
+                    </div>
+                    <div>
+                        <p class="font-bold text-gray-900">St. James Parish</p>
+                        <p class="text-sm text-gray-500">Applicant Agency</p>
+                    </div>
+                </div>
+                <div class="text-right text-sm text-gray-600">
+                    <p class="font-semibold text-gray-900">Contact Information</p>
+                    <p>Blake Roussel</p>
+                    <p><a href="mailto:blake.roussel@stjamesla.com" class="text-blue-600 hover:underline">blake.roussel@stjamesla.com</a></p>
+                    <p>225-562-2287</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+</body>
+</html>
